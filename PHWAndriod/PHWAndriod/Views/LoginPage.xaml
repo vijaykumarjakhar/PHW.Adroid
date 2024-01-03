@@ -7,25 +7,29 @@
              x:Class="PHWAndriod.Views.LoginPage"
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
-        
-        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
-            <BoxView HeightRequest="10"/>
-            <Image HorizontalOptions="Center" WidthRequest="300" Source="maco.jpg"/>
-            <Frame BackgroundColor="#BF043055" HasShadow="False">
-                <StackLayout Orientation="Vertical" Spacing="10">
-                    <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email"   
-                           PlaceholderColor="White" HeightRequest="40"   
-                           Keyboard="Email"  
-                           TextColor="White"/>
-                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Senha"   
-                           PlaceholderColor="White" HeightRequest="40"   
+        <StackLayout Orientation="Vertical" Margin="0,40,0,0" Padding="30" Spacing="40">
+            <Grid RowSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" HorizontalOptions="Center" WidthRequest="300" Source="logo.png"/>
+                <Frame Grid.Row="1" Margin="0,30,0,0" HasShadow="False">
+                    <StackLayout Orientation="Vertical" Spacing="10">
+                        <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email"   
+                            PlaceholderColor="Gray" Margin="0" HeightRequest="50"   
+                            Keyboard="Email"  
+                            TextColor="Black"/>
+                        <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password"   
+                           PlaceholderColor="Gray" HeightRequest="50"   
                            IsPassword="True"  
-                           TextColor="White"/>
-                </StackLayout>
-            </Frame>
-            <Button Command="{Binding LoginCommand}" Text="Login" TextColor="White"  
+                           TextColor="Black"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+            <Button VerticalOptions="EndAndExpand" Command="{Binding LoginCommand}" Text="Login" TextColor="white"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="#088da5" />
+                    BackgroundColor="#7CA739" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
