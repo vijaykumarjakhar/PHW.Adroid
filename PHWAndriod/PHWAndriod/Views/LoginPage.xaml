@@ -27,9 +27,8 @@
                     </StackLayout>
                 </Frame>
             </Grid>
-            <Button VerticalOptions="EndAndExpand" Command="{Binding LoginCommand}" Text="Login" TextColor="white"  
-                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="#7CA739" />
+            <Button VerticalOptions="EndAndExpand" Command="{Binding LoginCommand}" Text="Login" 
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -15,6 +15,7 @@ namespace PHWAndriod
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
+            Shell.Current.FlyoutIsPresented = false;
             await Shell.Current.GoToAsync("//LoginPage");
         }
     }
