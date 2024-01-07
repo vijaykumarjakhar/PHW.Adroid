@@ -77,6 +77,17 @@ namespace PHWAndriod.ViewModels
             }
         }
 
+        private int selectedInventoryTypeIndex;
+        public int SelectedInventoryTypeIndex
+        {
+            get { return selectedInventoryTypeIndex; }
+            set
+            {
+                selectedInventoryTypeIndex = value;
+                OnPropertyChanged(nameof(SelectedInventoryTypeIndex));
+            }
+        }
+
         private int scanCount;
         public int ScanCount
         {
@@ -111,19 +122,64 @@ namespace PHWAndriod.ViewModels
         }
 
 
+        AppLogic logic = new AppLogic();
         public Command ClearCommand { get; }
+        public Command GetStockInBarcodeDetailCommand { get; }
         #endregion
         public StockInViewModel()
         {
             Title = "Stock In";
+            LoadInventoryType();
             ClearCommand = new Command(ExecuteClearCommand);
+            GetStockInBarcodeDetailCommand = new Command(GetBarcodeInfo);
+        }
+
+        private async void GetBarcodeInfo(object obj)
+        {
+            try
+            {
+                if(SelectedInventoryTypeIndex > 0)
+                {
+
+                    var result = await logic.StockInGetScanBarcodeDetail(ItemList[SelectedInventoryTypeIndex].ItemTypeId, BarcodeNumber);
+                    if(result != null)
+                    {
+                        IsBarcodeLayoutVisible = true;
+                        ProductName = result.ItemName;
+                        Spool = result.Spool;
+                        Grade = result.Grade;
+                        Boxes = result.BoxQty;
+                        ScanCount = result.SpoolQty; //todo
+                        LastScan = result.CoilDia; //todo
+                    }
+                }
+            }
+            catch { }
+        }
+
+        private async void LoadInventoryType()
+        {
+            try
+            {
+                IsBusy = true;
+                var result = await logic.GetItemTypeMasterList();
+                if(result != null && result.Count > 0)
+                {
+                    ItemList = result;
+                    SelectedInventoryTypeIndex = 0;
+                }
+                IsBusy= false;
+            }
+            catch 
+            {
+                IsBusy = false;
+            }
         }
 
         private async void ExecuteClearCommand(object obj)
         {
             try
             {
-                AppLogic logic = new AppLogic();
                 var result = await logic.GetItemTypeMasterList();
             }
             catch(Exception ex)

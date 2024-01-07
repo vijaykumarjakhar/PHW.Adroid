@@ -31,13 +31,15 @@ namespace PHWAndriod.Services
                         itemList = JsonConvert.DeserializeObject<List<ItemTypeModel>>(content);
                         return itemList;
                     }
+                    else
+                        return null;
                 }
             }
             catch(Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return itemList;
         }
         #endregion
 
@@ -59,13 +61,15 @@ namespace PHWAndriod.Services
                         data = JsonConvert.DeserializeObject<ChildBarcodeDetailModel>(content);
                         return data;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return data;
         }
 
         public async Task<MasterBarcodeDetailModel> GetScanMasterBarcodeDetail(string barcode)
@@ -85,13 +89,15 @@ namespace PHWAndriod.Services
                         data = JsonConvert.DeserializeObject<MasterBarcodeDetailModel>(content);
                         return data;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return data;
         }
 
         #endregion
@@ -113,13 +119,15 @@ namespace PHWAndriod.Services
                         data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
                         return data;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return data;
         }
         public async Task<PhysicalListModel> GetPhysicalListById(int id, string createdBy)
         {
@@ -137,13 +145,15 @@ namespace PHWAndriod.Services
                         data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
                         return data;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return data;
         }
         public async Task<PhysicalListModel> AddOperationPhysicalVerify(PhysicalListModel request)
         {
@@ -165,13 +175,15 @@ namespace PHWAndriod.Services
                         data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
                         return data;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return data;
         }
         public async Task<PhysicalListModel> UpdateOperationPhysicalVerfiy(PhysicalListModel request)
         {
@@ -193,13 +205,15 @@ namespace PHWAndriod.Services
                         data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
                         return data;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return data;
         }
         public async Task<bool> DeleteOperationPhysical(int id)
         {
@@ -216,13 +230,15 @@ namespace PHWAndriod.Services
                     {
                         return data = true;
                     }
+                    else
+                        return false;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return false;
             }
-            return data;
         }
         #endregion
 
@@ -245,13 +261,15 @@ namespace PHWAndriod.Services
                         itemList = JsonConvert.DeserializeObject<List<PickListModel>>(content);
                         return itemList;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return itemList;
         }
         public async Task<PickOutProductListModel> GetPickOutWiseProductList(int pickOutId)
         {
@@ -270,13 +288,15 @@ namespace PHWAndriod.Services
                         itemList = JsonConvert.DeserializeObject<PickOutProductListModel>(content);
                         return itemList;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return itemList;
         }
         public async Task<PickOutProductSpoolModel> GetPickOutWiseProductWiseSpoolList(int pickOutId, int productId)
         {
@@ -295,13 +315,15 @@ namespace PHWAndriod.Services
                         result = JsonConvert.DeserializeObject<PickOutProductSpoolModel>(content);
                         return result;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return result;
         }
         public async Task<PickOutProductSpoolConditionModel> GetPickOutWiseProductWiseSpoolWiseConditionList(int pickOutId, int productId, int spoolId)
         {
@@ -320,13 +342,15 @@ namespace PHWAndriod.Services
                         data = JsonConvert.DeserializeObject<PickOutProductSpoolConditionModel>(content);
                         return data;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return data;
         }
         public async Task<List<PickOutProductSpoolConditionSizeModel>> GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList(int pickOutId, int productId, int spoolId, int conditionId)
         {
@@ -345,13 +369,15 @@ namespace PHWAndriod.Services
                         data = JsonConvert.DeserializeObject<List<PickOutProductSpoolConditionSizeModel>>(content);
                         return data;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return data;
         }
         #endregion
 
@@ -374,13 +400,15 @@ namespace PHWAndriod.Services
                         data = JsonConvert.DeserializeObject<StockInBarcodeDetail>(content);
                         return data;
                     }
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                
+                return null;
             }
-            return data;
         }
 
 
