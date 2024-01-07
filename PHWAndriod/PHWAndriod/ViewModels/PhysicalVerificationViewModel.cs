@@ -91,7 +91,8 @@ namespace PHWAndriod.ViewModels
             try
             {
                 IsBusy= true;
-                var result = logic.GetPhysicalList();
+                //var result = logic.GetPhysicalList();
+                //TODO: populate data
             }
             catch { }
             IsBusy = false;
