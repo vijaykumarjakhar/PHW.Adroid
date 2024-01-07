@@ -136,6 +136,7 @@ namespace PHWAndriod.ViewModels
 
         private async void GetBarcodeInfo(object obj)
         {
+            IsBusy = true;
             try
             {
                 if(SelectedInventoryTypeIndex > 0)
@@ -155,32 +156,34 @@ namespace PHWAndriod.ViewModels
                 }
             }
             catch { }
+            IsBusy = false;
         }
 
         private async void LoadInventoryType()
         {
+            IsBusy = true;
             try
             {
-                IsBusy = true;
                 var result = await logic.GetItemTypeMasterList();
                 if(result != null && result.Count > 0)
                 {
                     ItemList = result;
                     SelectedInventoryTypeIndex = 0;
                 }
-                IsBusy= false;
             }
             catch 
             {
-                IsBusy = false;
             }
+            IsBusy = false;
         }
 
         private async void ExecuteClearCommand(object obj)
         {
             try
             {
-                var result = await logic.GetItemTypeMasterList();
+                IsBarcodeLayoutVisible = false;
+                SelectedInventoryTypeIndex = 0;
+                BarcodeNumber = string.Empty;
             }
             catch(Exception ex)
             {
