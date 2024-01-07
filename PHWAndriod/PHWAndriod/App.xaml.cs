@@ -1,5 +1,4 @@
-﻿using PHWAndriod.Services;
-using PHWAndriod.Views;
+﻿using PHWAndriod.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,7 +12,6 @@ namespace PHWAndriod
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 
