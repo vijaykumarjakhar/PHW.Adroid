@@ -1,4 +1,5 @@
 ﻿using PHWAndriod.Models;
+using PHWAndriod.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -118,11 +119,12 @@ namespace PHWAndriod.ViewModels
             ClearCommand = new Command(ExecuteClearCommand);
         }
 
-        private void ExecuteClearCommand(object obj)
+        private async void ExecuteClearCommand(object obj)
         {
             try
             {
-
+                AppLogic logic = new AppLogic();
+                var result = await logic.GetItemTypeMasterList();
             }
             catch(Exception ex)
             {
