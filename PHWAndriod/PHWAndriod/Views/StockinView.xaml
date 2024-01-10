@@ -4,49 +4,58 @@
              Title="{Binding Title}"
              x:Class="PHWAndriod.Views.StockinView">
     <ContentPage.Content>
-        <StackLayout Margin="20" Spacing="30">
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Inventory Type" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
-                <Picker Title="Select Type" ItemsSource="{Binding ItemList}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-            </StackLayout>
-            <Entry Placeholder="Enter Barcode Number" Text="{Binding BarcodeNumber}"/>
-            <Grid x:Name="BarcodeDetailsLayout" IsVisible="{Binding IsBarcodeLayoutVisible}" RowSpacing="25" Padding="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Grid.Row="0" Text="Product Name :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+            <StackLayout Margin="20" Spacing="30">
+                <StackLayout Orientation="Horizontal" Spacing="30" >
+                    <Label Text="Inventory Type :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                    <Picker SelectedIndex="{Binding SelectedInventoryTypeIndex}" ItemsSource="{Binding ItemList}" ItemDisplayBinding="{Binding ItemTypeName}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <Entry Placeholder="Enter Barcode" ReturnCommand="{Binding GetStockInBarcodeDetailCommand}" Text="{Binding BarcodeNumber}"/>
 
-                <Label Grid.Column="0" Grid.Row="1" Text="Spool :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+                <ActivityIndicator
+                   IsRunning="{Binding IsBusy}"
+                   IsVisible="{Binding IsBusy}"
+                   Color="{StaticResource Primary}"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
+                
+                <Grid x:Name="BarcodeDetailsLayout" IsVisible="{Binding IsBarcodeLayoutVisible}" RowSpacing="25" Padding="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Text="Product Name :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
 
-                <Label Grid.Column="0" Grid.Row="2" Text="Grade :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+                    <Label Grid.Column="0" Grid.Row="1" Text="Spool :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
 
-                <Label Grid.Column="0" Grid.Row="3" Text="No. of Boxes/Spool :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+                    <Label Grid.Column="0" Grid.Row="2" Text="Grade :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
 
-                <Label Grid.Column="0" Grid.Row="4" Text="Scan Count :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+                    <Label Grid.Column="0" Grid.Row="3" Text="No. of Boxes/Spool :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
 
-                <Label Grid.Column="0" Grid.Row="5" Text="Last Scan Barcode :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+                    <Label Grid.Column="0" Grid.Row="4" Text="Scan Count :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
 
-                <Label Grid.Column="1" Grid.Row="0" Text="{Binding ProductName}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+                    <Label Grid.Column="0" Grid.Row="5" Text="Last Scan Barcode :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
 
-                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Spool}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding ProductName}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
 
-                <Label Grid.Column="1" Grid.Row="2" Text="{Binding Grade}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Spool}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
 
-                <Label Grid.Column="1" Grid.Row="3" Text="{Binding Boxes}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding Grade}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
 
-                <Label Grid.Column="1" Grid.Row="4" Text="{Binding ScanCount}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+                    <Label Grid.Column="1" Grid.Row="3" Text="{Binding Boxes}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
 
-                <Label Grid.Column="1" Grid.Row="5" Text="{Binding LastScan}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
-            </Grid>
+                    <Label Grid.Column="1" Grid.Row="4" Text="{Binding ScanCount}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+
+                    <Label Grid.Column="1" Grid.Row="5" Text="{Binding LastScan}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+                    
+                </Grid>
             <Button Text="Clear"  VerticalOptions="EndAndExpand" Command="{Binding ClearCommand}"
                     FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" />
         </StackLayout>

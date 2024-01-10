@@ -4,10 +4,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PHWAndriod.Views.PhysicalVerificationView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to PhysicalVerificationView!!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+            <ScrollView Margin="20">
+                <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+                    <ActivityIndicator Grid.RowSpan="3"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           AbsoluteLayout.LayoutFlags="PositionProportional"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize"
+                           Color="{StaticResource Primary}"
+                           VerticalOptions="EndAndExpand"
+                           HorizontalOptions="CenterAndExpand" />
+                    <Label Grid.Row="0" Text="Physical Verification" FontSize="30" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalOptions="Start"/>
+                    <Entry Grid.Row="1" Margin="0,10" Placeholder="Enter Barcode" ReturnCommand="{Binding GetBarcodeDetailCommand}" Text="{Binding BarcodeEntry}"/>
+                    <Grid Grid.Row="2" x:Name="BarcodeDetailsLayout" IsVisible="{Binding IsBarcodeLayoutVisible}" RowSpacing="25" Padding="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Text="Product Name :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+
+                        <Label Grid.Column="0" Grid.Row="1" Text="Description :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+
+                        <Label Grid.Column="0" Grid.Row="2" Text="Scan Count :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+
+                        <Label Grid.Column="0" Grid.Row="3" Text="Last Scan Barcode :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding ProductName}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Description}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+
+                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding ScanCount}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+
+                        <Label Grid.Column="1" Grid.Row="3" Text="{Binding LastScan}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+
+                    </Grid>
+                </Grid>
+                <Button Text="Clear"  VerticalOptions="EndAndExpand" Command="{Binding ClearCommand}"
+                        FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+            </ScrollView>
     </ContentPage.Content>
 </ContentPage>

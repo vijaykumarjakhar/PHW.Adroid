@@ -6,7 +6,7 @@ namespace PHWAndriod.Models
 {
     public class ItemTypeModel
     {
-        public string ItemTypeId { get; set; }
+        public int ItemTypeId { get; set; }
 
         public string ItemTypeName { get; set; }
     }
