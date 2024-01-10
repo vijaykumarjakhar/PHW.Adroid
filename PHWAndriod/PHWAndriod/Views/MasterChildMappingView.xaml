@@ -4,10 +4,51 @@
              Title="{Binding Title}"
              x:Class="PHWAndriod.Views.MasterChildMappingView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to MasterChildMappingView!!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView Margin="20">
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="Master Barcode : " VerticalOptions="Center" FontSize="20" FontAttributes="Bold" />
+                    <Entry Grid.Row="0" Grid.Column="1" Placeholder="Enter Barcode" VerticalOptions="StartAndExpand" ReturnCommand="{Binding GetMasterBarcodeDetailCommand}" Text="{Binding BarcodeEntry}"/>
+
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label IsVisible="{Binding IsMasterBarcodeLayoutVisible}" Grid.Row="0" Grid.Column="0" Text="Material Type :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+                        <Label IsVisible="{Binding IsMasterBarcodeLayoutVisible}" Grid.Row="0" Grid.Column="1" Text="{Binding Material}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+
+                        <Label IsVisible="{Binding IsMasterBarcodeLayoutVisible}" Grid.Row="1" Grid.Column="0" Text="Product Name :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+                        <Label IsVisible="{Binding IsMasterBarcodeLayoutVisible}" Grid.Row="1" Grid.Column="1" Text="{Binding Product}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+                    </Grid>
+                    
+                    <Label Grid.Row="2" Grid.Column="0" Text="Child Barcode : " VerticalOptions="Center" Margin="0,15,0,0" FontSize="20" FontAttributes="Bold" />
+                    <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Barcode" VerticalOptions="Start" Margin="0,15,0,0" ReturnCommand="{Binding GetChildBarcodeDetailCommand}" Text="{Binding BarcodeEntry}"/>
+
+                    <Label IsVisible="{Binding IsChildBarcodeLayoutVisible}" Grid.Row="3" Grid.Column="0" Text="Scan Count :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+                    <Label IsVisible="{Binding IsChildBarcodeLayoutVisible}" Grid.Row="3" Grid.Column="1" Text="{Binding ScanCount}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+                </Grid>
+                <Button Text="Map Barcode"  VerticalOptions="EndAndExpand" Command="{Binding MapBarcodeCommand}"
+                        FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" />
+                <Button Margin="0,10,0,0" Text="Clear"  VerticalOptions="End" Command="{Binding ClearCommand}"
+                        FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

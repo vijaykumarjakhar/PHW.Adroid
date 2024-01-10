@@ -150,8 +150,8 @@ namespace PHWAndriod.ViewModels
                         Spool = result.Spool;
                         Grade = result.Grade;
                         Boxes = result.BoxQty;
-                        ScanCount = result.SpoolQty; //todo
-                        LastScan = result.CoilDia; //todo
+                        ScanCount = App.ScanCount; //todo
+                        LastScan = App.LastBarcode; //todo
                     }
                 }
             }

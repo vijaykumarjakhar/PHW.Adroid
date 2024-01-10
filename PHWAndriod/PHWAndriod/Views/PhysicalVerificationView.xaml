@@ -51,7 +51,7 @@
 
                     </Grid>
                 </Grid>
-                <Button Grid.Row="3" Text="Clear"  VerticalOptions="EndAndExpand" Command="{Binding ClearCommand}"
+                <Button Text="Clear"  VerticalOptions="EndAndExpand" Command="{Binding ClearCommand}"
                         FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" />
                 </StackLayout>
             </ScrollView>

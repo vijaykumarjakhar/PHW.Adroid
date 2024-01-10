@@ -398,6 +398,9 @@ namespace PHWAndriod.Services
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         data = JsonConvert.DeserializeObject<StockInBarcodeDetail>(content);
+                        App.ScanCount++;
+                        App.LastBarcode = scanBarcode;
+                        App.BarcodeList.Add(scanBarcode);
                         return data;
                     }
                     else
