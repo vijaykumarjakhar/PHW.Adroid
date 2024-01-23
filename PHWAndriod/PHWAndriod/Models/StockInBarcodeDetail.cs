@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PHWAndriod.Models
+﻿namespace PHWAndriod.Models
 {
     public class StockInBarcodeDetail
     {
@@ -17,10 +13,10 @@ namespace PHWAndriod.Models
         public int ConditionId { get; set; }
         public int SizeId { get; set; }
         public int MachineId { get; set; }
-        public double? TareWeight { get; set; }  // Note: Nullable double
-        public double? NetWeight { get; set; }   // Note: Nullable double
-        public double? GrossWeight { get; set; } // Note: Nullable double
-        public double? ReGrossWeight { get; set; } // Note: Nullable double
+        public double TareWeight { get; set; }  // Note: Nullable double
+        public double NetWeight { get; set; }   // Note: Nullable double
+        public double GrossWeight { get; set; } // Note: Nullable double
+        public double ReGrossWeight { get; set; } // Note: Nullable double
         public string CoilDia { get; set; }
         public string LotNo { get; set; }
         public string PalletBarcode { get; set; }
@@ -29,9 +25,9 @@ namespace PHWAndriod.Models
         public int SpoolQty { get; set; }
         public int BoxQty { get; set; }
         public int PalletQty { get; set; }
-        public double? StockInQty { get; set; }  // Note: Nullable double
-        public double? StockOutQty { get; set; } // Note: Nullable double
-        public double? CurrentQty { get; set; }  // Note: Nullable double
+        public int StockInQty { get; set; }  // Note: Nullable double
+        public int StockOutQty { get; set; } // Note: Nullable double
+        public int CurrentQty { get; set; }  // Note: Nullable double
     }
 
 }

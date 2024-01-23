@@ -3,7 +3,6 @@ using PHWAndriod.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,9 +34,9 @@ namespace PHWAndriod.Services
                         return null;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
@@ -67,7 +66,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
@@ -95,7 +94,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
@@ -103,7 +102,7 @@ namespace PHWAndriod.Services
         #endregion
 
         #region PhysicalVerification
-        public async Task<PhysicalListModel> GetPhysicalList ()
+        public async Task<PhysicalListModel> GetPhysicalList()
         {
             PhysicalListModel data = new PhysicalListModel();
             try
@@ -125,7 +124,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
@@ -151,7 +150,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
@@ -181,7 +180,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
@@ -211,7 +210,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
@@ -236,7 +235,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return false;
             }
         }
@@ -267,13 +266,13 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
-        public async Task<PickOutProductListModel> GetPickOutWiseProductList(int pickOutId)
+        public async Task<List<PickOutProductListModel>> GetPickOutWiseProductList(int pickOutId)
         {
-            PickOutProductListModel itemList = new PickOutProductListModel();
+            List<PickOutProductListModel> itemList = new List<PickOutProductListModel>();
             try
             {
 
@@ -285,7 +284,7 @@ namespace PHWAndriod.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
-                        itemList = JsonConvert.DeserializeObject<PickOutProductListModel>(content);
+                        itemList = JsonConvert.DeserializeObject<List<PickOutProductListModel>>(content);
                         return itemList;
                     }
                     else
@@ -294,13 +293,13 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
-        public async Task<PickOutProductSpoolModel> GetPickOutWiseProductWiseSpoolList(int pickOutId, int productId)
+        public async Task<List<PickOutProductSpoolModel>> GetPickOutWiseProductWiseSpoolList(int pickOutId, int productId)
         {
-            PickOutProductSpoolModel result = new PickOutProductSpoolModel();
+            List<PickOutProductSpoolModel> result = new List<PickOutProductSpoolModel>();
             try
             {
 
@@ -312,7 +311,7 @@ namespace PHWAndriod.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
-                        result = JsonConvert.DeserializeObject<PickOutProductSpoolModel>(content);
+                        result = JsonConvert.DeserializeObject<List<PickOutProductSpoolModel>>(content);
                         return result;
                     }
                     else
@@ -321,13 +320,13 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
-        public async Task<PickOutProductSpoolConditionModel> GetPickOutWiseProductWiseSpoolWiseConditionList(int pickOutId, int productId, int spoolId)
+        public async Task<List<PickOutProductSpoolConditionModel>> GetPickOutWiseProductWiseSpoolWiseConditionList(int pickOutId, int productId, int spoolId)
         {
-            PickOutProductSpoolConditionModel data = new PickOutProductSpoolConditionModel();
+            List<PickOutProductSpoolConditionModel> data = new List<PickOutProductSpoolConditionModel>();
             try
             {
 
@@ -339,7 +338,7 @@ namespace PHWAndriod.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
-                        data = JsonConvert.DeserializeObject<PickOutProductSpoolConditionModel>(content);
+                        data = JsonConvert.DeserializeObject<List<PickOutProductSpoolConditionModel>>(content);
                         return data;
                     }
                     else
@@ -348,7 +347,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
@@ -375,7 +374,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }
@@ -383,9 +382,9 @@ namespace PHWAndriod.Services
 
         #region StockIn
 
-        public async Task<StockInBarcodeDetail> StockInGetScanBarcodeDetail(int itemTypeId, string scanBarcode)
+        public async Task<List<StockInBarcodeDetail>> StockInGetScanBarcodeDetail(int itemTypeId, string scanBarcode)
         {
-            StockInBarcodeDetail data = new StockInBarcodeDetail();
+            List<StockInBarcodeDetail> data = new List<StockInBarcodeDetail>();
             try
             {
 
@@ -397,7 +396,7 @@ namespace PHWAndriod.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string content = await response.Content.ReadAsStringAsync();
-                        data = JsonConvert.DeserializeObject<StockInBarcodeDetail>(content);
+                        data = JsonConvert.DeserializeObject<List<StockInBarcodeDetail>>(content);
                         App.ScanCount++;
                         App.LastBarcode = scanBarcode;
                         App.BarcodeList.Add(scanBarcode);
@@ -409,7 +408,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
         }

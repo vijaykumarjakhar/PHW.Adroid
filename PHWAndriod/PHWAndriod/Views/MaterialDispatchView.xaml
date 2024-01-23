@@ -1,13 +1,118 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              Title="{Binding Title}"
              x:Class="PHWAndriod.Views.MaterialDispatchView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Material Dispatch View!!!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid Margin="0" Padding="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ActivityIndicator Grid.Row="0" Grid.Column="0" 
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            Color="{StaticResource Primary}"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand" />
+            <ScrollView Padding="0" Margin="0">
+                <StackLayout Grid.Row="0" Grid.Column="0" Margin="20" Spacing="20">
+                    <StackLayout Orientation="Horizontal" Spacing="30" >
+                        <Label Text="Pick List No :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Picker SelectedIndex="{Binding SelectedPickListIndex}" ItemsSource="{Binding PickList}" ItemDisplayBinding="{Binding PickOutno}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Picker.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                                Command="{Binding PickListSelectedIndexChangedCommand}" />
+                            </Picker.Behaviors>
+                        </Picker>
+                    </StackLayout>
+
+                    <StackLayout IsEnabled="{Binding IsProductListEnabled}" Orientation="Horizontal" Spacing="30" >
+                        <Label Text="Product :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Picker SelectedIndex="{Binding SelectedProductListIndex}" ItemsSource="{Binding ProductList}" ItemDisplayBinding="{Binding ItemName}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Picker.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                        Command="{Binding ProductListSelectedIndexChangedCommand}" />
+                            </Picker.Behaviors>
+                        </Picker>
+                    </StackLayout>
+
+                    <StackLayout IsEnabled="{Binding IsSpoolListEnabled}" Orientation="Horizontal" Spacing="30" >
+                        <Label Text="Spool :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Picker SelectedIndex="{Binding SelectedSpoolListIndex}" ItemsSource="{Binding SpoolList}" ItemDisplayBinding="{Binding Spool}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Picker.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                        Command="{Binding SpoolListSelectedIndexChangedCommand}" />
+                            </Picker.Behaviors>
+                        </Picker>
+                    </StackLayout>
+
+                    <StackLayout IsEnabled="{Binding IsConditionListEnabled}" Orientation="Horizontal" Spacing="30" >
+                        <Label Text="Condition :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Picker SelectedIndex="{Binding SelectedConditionListIndex}" ItemsSource="{Binding ConditionList}" ItemDisplayBinding="{Binding Condition}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Picker.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                        Command="{Binding ConditionListSelectedIndexChangedCommand}" />
+                            </Picker.Behaviors>
+                        </Picker>
+                    </StackLayout>
+
+                    <StackLayout IsEnabled="{Binding IsSizeListEnabled}" Orientation="Horizontal" Spacing="30" >
+                        <Label Text="Size :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Picker SelectedIndex="{Binding SelectedSizeListIndex}" ItemsSource="{Binding SizeList}" ItemDisplayBinding="{Binding Size}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Picker.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                        Command="{Binding SizeListSelectedIndexChangedCommand}" />
+                            </Picker.Behaviors>
+                        </Picker>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Req. Qty : " FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Label Text="{Binding ReqQty}" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="#FFA500"/>
+
+                        <Label Text="Out Qty : " FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Label Text="{Binding OutQty}" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="#FFA500"/>
+                    </StackLayout>
+
+                    <Entry Placeholder="Enter Barcode" Grid.Row="6" Grid.Column="0" ReturnCommand="{Binding GetStockInBarcodeDetailCommand}" Text="{Binding BarcodeNumber}"/>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                            <Label Text="Pack Type :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                            <Label Text="Box" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                            <Label Text="Grade :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                            <Label Text="Box" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
+                        </StackLayout>
+
+                   
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                            <Label Text="Box Qty :" TextColor="#FF0000" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                            <Label Text="Box" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                            <Label Text="Spool Qty :" TextColor="#FF0000" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                            <Label Text="Box" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Text="Last Scan Barcode :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
+                        <Label Text="{Binding LastScan}" FontSize="20" FontAttributes="Bold" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+                     </StackLayout>
+                    <Button Text="Clear"  VerticalOptions="EndAndExpand" Command="{Binding ClearCommand}"
+                FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

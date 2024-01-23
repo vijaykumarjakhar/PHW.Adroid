@@ -2,7 +2,6 @@
 using PHWAndriod.Services;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace PHWAndriod.ViewModels
@@ -26,9 +25,9 @@ namespace PHWAndriod.ViewModels
         public string BarcodeNumber
         {
             get { return barcodeNumber; }
-            set 
-            { 
-                barcodeNumber = value; 
+            set
+            {
+                barcodeNumber = value;
                 OnPropertyChanged(nameof(BarcodeNumber));
             }
         }
@@ -37,8 +36,8 @@ namespace PHWAndriod.ViewModels
         public string ProductName
         {
             get { return productName; }
-            set 
-            { 
+            set
+            {
                 productName = value;
                 OnPropertyChanged(nameof(ProductName));
             }
@@ -48,9 +47,9 @@ namespace PHWAndriod.ViewModels
         public string Spool
         {
             get { return spool; }
-            set 
+            set
             {
-                spool = value; 
+                spool = value;
                 OnPropertyChanged(nameof(Spool));
             }
         }
@@ -59,9 +58,9 @@ namespace PHWAndriod.ViewModels
         public string Grade
         {
             get { return grade; }
-            set 
+            set
             {
-                grade = value; 
+                grade = value;
                 OnPropertyChanged(nameof(Grade));
             }
         }
@@ -72,7 +71,7 @@ namespace PHWAndriod.ViewModels
             get { return boxes; }
             set
             {
-                boxes = value; 
+                boxes = value;
                 OnPropertyChanged(nameof(Boxes));
             }
         }
@@ -94,7 +93,7 @@ namespace PHWAndriod.ViewModels
             get { return scanCount; }
             set
             {
-                scanCount = value; 
+                scanCount = value;
                 OnPropertyChanged(nameof(ScanCount));
             }
         }
@@ -139,17 +138,17 @@ namespace PHWAndriod.ViewModels
             IsBusy = true;
             try
             {
-                if(SelectedInventoryTypeIndex > 0)
+                if (SelectedInventoryTypeIndex > 0)
                 {
 
                     var result = await logic.StockInGetScanBarcodeDetail(ItemList[SelectedInventoryTypeIndex].ItemTypeId, BarcodeNumber);
-                    if(result != null)
+                    if (result != null)
                     {
                         IsBarcodeLayoutVisible = true;
-                        ProductName = result.ItemName;
-                        Spool = result.Spool;
-                        Grade = result.Grade;
-                        Boxes = result.BoxQty;
+                        ProductName = result[0].ItemName;
+                        Spool = result[0].Spool;
+                        Grade = result[0].Grade;
+                        Boxes = result[0].BoxQty;
                         ScanCount = App.ScanCount; //todo
                         LastScan = App.LastBarcode; //todo
                     }
@@ -165,13 +164,13 @@ namespace PHWAndriod.ViewModels
             try
             {
                 var result = await logic.GetItemTypeMasterList();
-                if(result != null && result.Count > 0)
+                if (result != null && result.Count > 0)
                 {
                     ItemList = result;
                     SelectedInventoryTypeIndex = 0;
                 }
             }
-            catch 
+            catch
             {
             }
             IsBusy = false;
@@ -185,9 +184,9 @@ namespace PHWAndriod.ViewModels
                 SelectedInventoryTypeIndex = 0;
                 BarcodeNumber = string.Empty;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-            
+
             }
         }
     }
