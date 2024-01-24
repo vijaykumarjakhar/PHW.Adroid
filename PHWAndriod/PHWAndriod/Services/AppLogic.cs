@@ -36,7 +36,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - GetItemTypeMasterList");
                 return null;
             }
         }
@@ -66,7 +66,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - GetScanChildBarcodeDetail");
                 return null;
             }
         }
@@ -94,7 +94,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - GetScanMasterBarcodeDetail");
                 return null;
             }
         }
@@ -124,7 +124,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - GetPhysicalList");
                 return null;
             }
         }
@@ -150,7 +150,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - GetPhysicalListById");
                 return null;
             }
         }
@@ -180,7 +180,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - AddOperationPhysicalVerify");
                 return null;
             }
         }
@@ -210,7 +210,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - UpdateOperationPhysicalVerfiy");
                 return null;
             }
         }
@@ -235,7 +235,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - DeleteOperationPhysical");
                 return false;
             }
         }
@@ -266,7 +266,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - PickListMasterList");
                 return null;
             }
         }
@@ -293,7 +293,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - GetPickOutWiseProductList");
                 return null;
             }
         }
@@ -320,7 +320,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - GetPickOutWiseProductWiseSpoolList");
                 return null;
             }
         }
@@ -347,7 +347,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - GetPickOutWiseProductWiseSpoolWiseConditionList");
                 return null;
             }
         }
@@ -374,7 +374,7 @@ namespace PHWAndriod.Services
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList");
                 return null;
             }
         }
@@ -403,12 +403,15 @@ namespace PHWAndriod.Services
                         return data;
                     }
                     else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Paramhans Wires", response.ReasonPhrase, "Ok");
                         return null;
+                    }
                 }
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "AppLogic - StockInGetScanBarcodeDetail");
                 return null;
             }
         }
