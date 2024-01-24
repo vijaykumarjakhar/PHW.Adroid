@@ -2,16 +2,16 @@
 using PHWAndriod.Services;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace PHWAndriod.ViewModels
 {
-    public class MaterialDispatchViewModel: BaseViewModel
+    public class MaterialDispatchViewModel : BaseViewModel
     {
         AppLogic logic = new AppLogic();
 
+        #region Properties
         private List<PickListModel> pickList;
         public List<PickListModel> PickList
         {
@@ -126,8 +126,8 @@ namespace PHWAndriod.ViewModels
         public bool IsConditionListEnabled
         {
             get { return isConditionListEnabled; }
-            set 
-            { 
+            set
+            {
                 isConditionListEnabled = value;
                 OnPropertyChanged(nameof(IsConditionListEnabled));
             }
@@ -171,6 +171,8 @@ namespace PHWAndriod.ViewModels
         public Command SpoolListSelectedIndexChangedCommand { get; }
         public Command ConditionListSelectedIndexChangedCommand { get; }
         public Command SizeListSelectedIndexChangedCommand { get; }
+
+        #endregion
         public MaterialDispatchViewModel()
         {
             Title = "Material Dispatch/Re-Dispatch";
@@ -203,8 +205,9 @@ namespace PHWAndriod.ViewModels
                     SelectedPickListIndex = 0;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                ExceptionHandler.HandleException(ex, "MaterialDispatchViewModel - LoadPickList");
             }
             IsBusy = false;
         }
@@ -214,7 +217,7 @@ namespace PHWAndriod.ViewModels
             IsBusy = true;
             try
             {
-                if(SelectedPickListIndex > 0)
+                if (SelectedPickListIndex > 0)
                 {
                     IsProductListEnabled = true;
                     var result = await logic.GetPickOutWiseProductList(PickList[SelectedPickListIndex].PickOutId);
@@ -227,8 +230,9 @@ namespace PHWAndriod.ViewModels
                 else
                     IsProductListEnabled = false;
             }
-            catch
+            catch (Exception ex)
             {
+                ExceptionHandler.HandleException(ex, "MaterialDispatchViewModel - LoadProductList");
             }
             IsBusy = false;
         }
@@ -238,7 +242,7 @@ namespace PHWAndriod.ViewModels
             IsBusy = true;
             try
             {
-                if(SelectedSpoolListIndex > 0)
+                if (SelectedSpoolListIndex > 0)
                 {
                     IsConditionListEnabled = true;
                     var result = await logic.GetPickOutWiseProductWiseSpoolWiseConditionList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId, SpoolList[SelectedSpoolListIndex].SpoolId);
@@ -249,10 +253,11 @@ namespace PHWAndriod.ViewModels
                     }
                 }
                 else
-                    IsConditionListEnabled= false;
+                    IsConditionListEnabled = false;
             }
-            catch
+            catch (Exception ex)
             {
+                ExceptionHandler.HandleException(ex, "MaterialDispatchViewModel - LoadConditionList");
             }
             IsBusy = false;
         }
@@ -262,9 +267,9 @@ namespace PHWAndriod.ViewModels
             IsBusy = true;
             try
             {
-                if(SelectedProductListIndex > 0)
+                if (SelectedProductListIndex > 0)
                 {
-                    IsSpoolListEnabled= true;
+                    IsSpoolListEnabled = true;
                     var result = await logic.GetPickOutWiseProductWiseSpoolList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId);
                     if (result != null && result.Count > 0)
                     {
@@ -273,10 +278,11 @@ namespace PHWAndriod.ViewModels
                     }
                 }
                 else
-                    IsSpoolListEnabled= false;
+                    IsSpoolListEnabled = false;
             }
-            catch
+            catch (Exception ex)
             {
+                ExceptionHandler.HandleException(ex, "MaterialDispatchViewModel - LoadSpoolList");
             }
             IsBusy = false;
         }
@@ -286,9 +292,9 @@ namespace PHWAndriod.ViewModels
             IsBusy = true;
             try
             {
-                if(selectedConditionListIndex> 0)
+                if (selectedConditionListIndex > 0)
                 {
-                    IsSizeListEnabled= true;
+                    IsSizeListEnabled = true;
                     var result = await logic.GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId, SpoolList[SelectedSpoolListIndex].SpoolId, ConditionList[SelectedConditionListIndex].ConditionId);
                     if (result != null && result.Count > 0)
                     {
@@ -297,10 +303,11 @@ namespace PHWAndriod.ViewModels
                     }
                 }
                 else
-                    IsSizeListEnabled= false;  
+                    IsSizeListEnabled = false;
             }
-            catch
+            catch (Exception ex)
             {
+                ExceptionHandler.HandleException(ex, "MaterialDispatchViewModel - LoadSizeList");
             }
             IsBusy = false;
         }

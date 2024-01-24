@@ -1,7 +1,5 @@
 ﻿using PHWAndriod.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace PHWAndriod.ViewModels
@@ -90,11 +88,14 @@ namespace PHWAndriod.ViewModels
         {
             try
             {
-                IsBusy= true;
+                IsBusy = true;
                 //var result = logic.GetPhysicalList();
                 //TODO: populate data
             }
-            catch { }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "PhysicalVerificationViewModel - GetBarcodeDetails");
+            }
             IsBusy = false;
 
         }
@@ -108,7 +109,7 @@ namespace PHWAndriod.ViewModels
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "PhysicalVerificationViewModel - ExecuteClearCommand");
             }
         }
     }

@@ -154,7 +154,10 @@ namespace PHWAndriod.ViewModels
                     }
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "StockInViewModel - GetBarcodeInfo");
+            }
             IsBusy = false;
         }
 
@@ -170,8 +173,9 @@ namespace PHWAndriod.ViewModels
                     SelectedInventoryTypeIndex = 0;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                ExceptionHandler.HandleException(ex, "StockInViewModel - LoadInventoryType");
             }
             IsBusy = false;
         }
@@ -186,7 +190,7 @@ namespace PHWAndriod.ViewModels
             }
             catch (Exception ex)
             {
-
+                ExceptionHandler.HandleException(ex, "StockInViewModel - ExecuteClearCommand");
             }
         }
     }
