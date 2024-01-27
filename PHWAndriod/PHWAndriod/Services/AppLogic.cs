@@ -378,6 +378,60 @@ namespace PHWAndriod.Services
                 return null;
             }
         }
+        public async Task<List<BookingDispatchProductDetailListModel>> GetDispatchProductdetail(int pickOutId, int productId, int spoolId, int conditionId, int sizeId)
+        {
+            List<BookingDispatchProductDetailListModel> data = new List<BookingDispatchProductDetailListModel>();
+            try
+            {
+
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = $"{BaseURL}GetPickList_Dispatch_ProductDetailListAsync?PickOutId={pickOutId}&ItemId={productId}&SpoolId={spoolId}&ConditionId={conditionId}&SizeId={sizeId}";
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        data = JsonConvert.DeserializeObject<List<BookingDispatchProductDetailListModel>>(content);
+                        return data;
+                    }
+                    else
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "AppLogic - GetDispatchProductdetail");
+                return null;
+            }
+        }
+        public async Task<List<BookingDispatchProductDetailListModel>> GetBookingProductdetail(int pickOutId, int productId, int spoolId, int conditionId, int sizeId)
+        {
+            List<BookingDispatchProductDetailListModel> data = new List<BookingDispatchProductDetailListModel>();
+            try
+            {
+
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = $"{BaseURL}GetPickList_Booking_ProductDetailListAsync?PickOutId={pickOutId}&ItemId={productId}&SpoolId={spoolId}&ConditionId={conditionId}&SizeId={sizeId}";
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        data = JsonConvert.DeserializeObject<List<BookingDispatchProductDetailListModel>>(content);
+                        return data;
+                    }
+                    else
+                        return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "AppLogic - GetBookingProductdetail");
+                return null;
+            }
+        }
         #endregion
 
         #region StockIn
@@ -439,6 +493,72 @@ namespace PHWAndriod.Services
             }
             return data;
         }
+        #endregion
+
+        #region Dispatch
+
+        public async Task<List<DispatchBarcodeDetailModel>> GetDispatchBarcodeDetail(string packType, int spoolId, int conditionId, int sizeId, int gradeId, int itemId, string scanBarcode)
+        {
+            List<DispatchBarcodeDetailModel> data = new List<DispatchBarcodeDetailModel>();
+            try
+            {
+
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = $"{BaseURL}api/Dispatch/Dispatch_GetScanBarcodeDetail?&PackType={packType}&SpoolId={spoolId}&ConditionId={conditionId}&SizeId={sizeId}&GradeId={gradeId}&ScanBarcode={scanBarcode}&ItemId={itemId}";
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        data = JsonConvert.DeserializeObject<List<DispatchBarcodeDetailModel>>(content);
+                        return data;
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Paramhans Wires", response.ReasonPhrase, "Ok");
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "AppLogic - GetDispatchBarcodeDetail");
+                return null;
+            }
+        }
+
+        public async Task<bool> AddOperationDispatchStockOutChild(DispatchFinalDetailModel request)
+        {
+            bool data = false;
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = $"{BaseURL}api/Dispatch/addOperationDispatch_tblStockOutChild";
+
+                    string jsonData = JsonConvert.SerializeObject(request);
+                    HttpContent requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, requestContent);
+
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "AppLogic - AddOperationDispatchStockOutChild");
+            }
+            return data;
+        }
+
+        #endregion
+
+        #region Booking
+
         #endregion
     }
 }
