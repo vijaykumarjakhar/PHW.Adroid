@@ -1,13 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              Title="{Binding Title}"
              x:Class="PHWAndriod.Views.MaterialBookingView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to MaterialBookingView!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="20">
+            <ScrollView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ActivityIndicator Grid.RowSpan="10" Grid.ColumnSpan="3" 
+                        IsRunning="{Binding IsBusy}"
+                        IsVisible="{Binding IsBusy}"
+                        Color="{StaticResource Primary}"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand" />
+                        
+                    <Label Grid.Row="0" Grid.ColumnSpan="3" Text="Physical Verification" FontSize="30" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalOptions="Start"/>
+
+                    <StackLayout Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="30" >
+                        <Label Text="Pick List No :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Picker SelectedIndex="{Binding SelectedPickListIndex}" ItemsSource="{Binding PickList}" ItemDisplayBinding="{Binding PickOutno}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Picker.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                                Command="{Binding PickListSelectedIndexChangedCommand}" />
+                            </Picker.Behaviors>
+                        </Picker>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="2" Grid.ColumnSpan="3" IsEnabled="{Binding IsProductListEnabled}" Orientation="Horizontal" Spacing="30" >
+                        <Label Text="Product :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Picker SelectedIndex="{Binding SelectedProductListIndex}" ItemsSource="{Binding ProductList}" ItemDisplayBinding="{Binding ItemName}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Picker.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                        Command="{Binding ProductListSelectedIndexChangedCommand}" />
+                            </Picker.Behaviors>
+                        </Picker>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="3" Grid.ColumnSpan="3" IsEnabled="{Binding IsSpoolListEnabled}" Orientation="Horizontal" Spacing="30" >
+                        <Label Text="Spool :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Picker SelectedIndex="{Binding SelectedSpoolListIndex}" ItemsSource="{Binding SpoolList}" ItemDisplayBinding="{Binding Spool}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Picker.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                        Command="{Binding SpoolListSelectedIndexChangedCommand}" />
+                            </Picker.Behaviors>
+                        </Picker>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="4" Grid.ColumnSpan="3" IsEnabled="{Binding IsConditionListEnabled}" Orientation="Horizontal" Spacing="30" >
+                        <Label Text="Condition :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Picker SelectedIndex="{Binding SelectedConditionListIndex}" ItemsSource="{Binding ConditionList}" ItemDisplayBinding="{Binding Condition}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Picker.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                        Command="{Binding ConditionListSelectedIndexChangedCommand}" />
+                            </Picker.Behaviors>
+                        </Picker>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="5" Grid.ColumnSpan="3" IsEnabled="{Binding IsSizeListEnabled}" Orientation="Horizontal" Spacing="30" >
+                        <Label Text="Size :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                        <Picker SelectedIndex="{Binding SelectedSizeListIndex}" ItemsSource="{Binding SizeList}" ItemDisplayBinding="{Binding Size}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Picker.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                        Command="{Binding SizeListSelectedIndexChangedCommand}" />
+                            </Picker.Behaviors>
+                        </Picker>
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+            <Button Text="Clear"  VerticalOptions="EndAndExpand" Command="{Binding ClearCommand}"
+                    FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
