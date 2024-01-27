@@ -129,6 +129,8 @@ namespace PHWAndriod.ViewModels
         {
             Title = "Stock In";
             LoadInventoryType();
+            ScanCount = 0;
+            LastScan = string.Empty;
             ClearCommand = new Command(ExecuteClearCommand);
             GetStockInBarcodeDetailCommand = new Command(GetBarcodeInfo);
         }
@@ -149,8 +151,13 @@ namespace PHWAndriod.ViewModels
                         Spool = result[0].Spool;
                         Grade = result[0].Grade;
                         Boxes = result[0].BoxQty;
-                        ScanCount = App.ScanCount; //todo
-                        LastScan = App.LastBarcode; //todo
+                        StockInFinalDetailModel data = new StockInFinalDetailModel(result[0]);
+                        var response = await logic.AddOperationStockInFinalInventory(data);
+                        if (response)
+                        {
+                            ScanCount += 1;
+                            LastScan = BarcodeNumber;
+                        }
                     }
                 }
             }

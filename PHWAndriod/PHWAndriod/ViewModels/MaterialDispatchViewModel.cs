@@ -171,22 +171,49 @@ namespace PHWAndriod.ViewModels
         public Command SpoolListSelectedIndexChangedCommand { get; }
         public Command ConditionListSelectedIndexChangedCommand { get; }
         public Command SizeListSelectedIndexChangedCommand { get; }
+        public Command ClearCommand { get; }
 
         #endregion
         public MaterialDispatchViewModel()
         {
             Title = "Material Dispatch/Re-Dispatch";
-            Parallel.Invoke(
-                () => LoadPickList(),
-                () => LoadProductList(),
-                () => LoadSpoolList(),
-                () => LoadConditionList(),
-                () => LoadSizeList());
+            InitaliseScreen();
+            ClearCommand = new Command(ExecuteClearCommand);
             PickListSelectedIndexChangedCommand = new Command(LoadProductList);
             ProductListSelectedIndexChangedCommand = new Command(LoadSpoolList);
             SpoolListSelectedIndexChangedCommand = new Command(LoadConditionList);
             ConditionListSelectedIndexChangedCommand = new Command(LoadSizeList);
             SizeListSelectedIndexChangedCommand = new Command(LoadData);
+        }
+
+        private async void ExecuteClearCommand(object obj)
+        {
+            try
+            {
+                InitaliseScreen();
+                //BarcodeNumber = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "MaterialDispatchViewModel - ExecuteClearCommand");
+            }
+        }
+
+        private void InitaliseScreen()
+        {
+            try
+            {
+                Parallel.Invoke(
+                    () => LoadPickList(),
+                    () => LoadProductList(),
+                    () => LoadSpoolList(),
+                    () => LoadConditionList(),
+                    () => LoadSizeList());
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "MaterialDispatchViewModel - InitaliseScreen");
+            }
         }
 
         private void LoadData(object obj)

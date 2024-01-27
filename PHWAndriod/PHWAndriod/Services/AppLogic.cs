@@ -24,7 +24,7 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}api/ItemTypeMaster/ItemTypeMasterList";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         itemList = JsonConvert.DeserializeObject<List<ItemTypeModel>>(content);
@@ -54,7 +54,7 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}api/MasterMapping/GetScanChildBarcodeDetail?MaterialType={material}&ItemName={item}&ScanChildBarcode={barcode}";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         data = JsonConvert.DeserializeObject<ChildBarcodeDetailModel>(content);
@@ -82,7 +82,7 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}api/MasterMapping/GetScanMasterBarcodeDetail?ScanMasterBarcode={barcode}";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         data = JsonConvert.DeserializeObject<MasterBarcodeDetailModel>(content);
@@ -112,7 +112,7 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}api/PhysicalVerification/getphysicallist";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
@@ -138,7 +138,7 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}api/PhysicalVerification/getphysicallistbyid?id={id}&CreatedBY={createdBy}";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
@@ -168,7 +168,7 @@ namespace PHWAndriod.Services
 
                     HttpResponseMessage response = await client.PostAsync(apiUrl, requestContent);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
@@ -198,7 +198,7 @@ namespace PHWAndriod.Services
 
                     HttpResponseMessage response = await client.PutAsync(apiUrl, requestContent);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
@@ -225,7 +225,7 @@ namespace PHWAndriod.Services
 
                     HttpResponseMessage response = await client.DeleteAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         return data = true;
                     }
@@ -254,7 +254,7 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}PickListMasterList";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         itemList = JsonConvert.DeserializeObject<List<PickListModel>>(content);
@@ -281,7 +281,7 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}GetPickOutWiseProductList?PickOutId={pickOutId}";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         itemList = JsonConvert.DeserializeObject<List<PickOutProductListModel>>(content);
@@ -308,7 +308,7 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}GetPickOutWiseProductWiseSpoolList?PickOutId={pickOutId}&ItemId={productId}";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         result = JsonConvert.DeserializeObject<List<PickOutProductSpoolModel>>(content);
@@ -335,7 +335,7 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}GetPickOutWiseProductWiseSpoolWiseConditionList?PickOutId={pickOutId}&ItemId={productId}&SpoolId={spoolId}";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         data = JsonConvert.DeserializeObject<List<PickOutProductSpoolConditionModel>>(content);
@@ -362,7 +362,7 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList?PickOutId={pickOutId}&ItemId={productId}&SpoolId={spoolId}&ConditionId={conditionId}";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         data = JsonConvert.DeserializeObject<List<PickOutProductSpoolConditionSizeModel>>(content);
@@ -393,13 +393,10 @@ namespace PHWAndriod.Services
                     string apiUrl = $"{BaseURL}api/StockIn/StockIn_GetScanBarcodeDetail?ScanBarcode={scanBarcode}&ItemTypeId={itemTypeId}";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
                         data = JsonConvert.DeserializeObject<List<StockInBarcodeDetail>>(content);
-                        App.ScanCount++;
-                        App.LastBarcode = scanBarcode;
-                        App.BarcodeList.Add(scanBarcode);
                         return data;
                     }
                     else
@@ -416,7 +413,32 @@ namespace PHWAndriod.Services
             }
         }
 
+        public async Task<bool> AddOperationStockInFinalInventory(StockInFinalDetailModel request)
+        {
+            bool data = false;
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = $"{BaseURL}api/StockIn/addOperationStockIn_FinalInventory";
 
+                    string jsonData = JsonConvert.SerializeObject(request);
+                    HttpContent requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, requestContent);
+
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "AppLogic - AddOperationStockInFinalInventory");
+            }
+            return data;
+        }
         #endregion
     }
 }
