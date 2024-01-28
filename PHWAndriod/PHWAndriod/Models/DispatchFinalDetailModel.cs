@@ -19,7 +19,7 @@
         public int Id => 1;
         public string RequisitionNo => PickListModel.PickOutno;
         public int RequisitionId => PickListModel.PickOutId;
-        public string Description => BookingDispatchProductDetailListModel.PackType;
+        public string Description => "Item Dispatched";
         public int ItemId => PickOutProductListModel.ItemId;
         public int RequiredQty => BookingDispatchProductDetailListModel.BoxQty;
         public int IssueQty => 1;
@@ -41,7 +41,7 @@
         public string BoxBarcode => BaseModel.BoxBarcode;
         public int SpoolQty => BaseModel.SpoolQty;
         public int BoxQty => BaseModel.BoxQty;
-        public int StockOutQty => BookingDispatchProductDetailListModel.OutQty + 1;
+        public int StockOutQty => 1;
         public int CompanyId => 0;
         public int FYId => 0;
         public int VerticalId => 0;

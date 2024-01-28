@@ -291,16 +291,20 @@ namespace PHWAndriod.ViewModels
                     BoxQty = result[0].BoxQty;
                     SpoolQty = result[0].SpoolQty;
 
-                    DispatchFinalDetailModel finalModel = new DispatchFinalDetailModel(result[0], PickList[SelectedPickListIndex], bookingModel, ProductList[SelectedProductListIndex]);
-                    var resopnse = await logic.AddOperationDispatchStockOutChild(finalModel);
-                    if (resopnse)
+                    foreach (DispatchBarcodeDetailModel model in result)
                     {
-                        LastScan = BarcodeNumber;
-                        OutQty += 1;
-                        if (OutQty >= ReqQty)
+                        DispatchFinalDetailModel finalModel = new DispatchFinalDetailModel(model, PickList[SelectedPickListIndex], bookingModel, ProductList[SelectedProductListIndex]);
+                        var resopnse = await logic.AddOperationDispatchStockOutChild(finalModel);
+                        if (resopnse)
                         {
-                            IsBusy = false;
-                            await App.Current.MainPage.DisplayAlert("PHW", "Required Qty fullfilled", "Ok");
+                            LastScan = BarcodeNumber;
+                            OutQty += 1;
+                            bookingModel.OutQty = OutQty;
+                            if (OutQty >= ReqQty)
+                            {
+                                IsBusy = false;
+                                await App.Current.MainPage.DisplayAlert("PHW", "Required Qty fullfilled", "Ok");
+                            }
                         }
                     }
                 }
