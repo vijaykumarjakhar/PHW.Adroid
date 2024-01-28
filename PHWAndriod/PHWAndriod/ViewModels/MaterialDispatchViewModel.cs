@@ -279,7 +279,7 @@ namespace PHWAndriod.ViewModels
             GetDispatchBarcodeDetailCommand = new Command(GetDispactBarcodeDetails);
         }
 
-        private async void GetDispactBarcodeDetails(object obj)
+        private async void GetDispactBarcodeDetails()
         {
             IsBusy = true;
             try
@@ -320,7 +320,7 @@ namespace PHWAndriod.ViewModels
             IsBusy = false;
         }
 
-        private async void ExecuteClearCommand(object obj)
+        private async void ExecuteClearCommand()
         {
             try
             {
