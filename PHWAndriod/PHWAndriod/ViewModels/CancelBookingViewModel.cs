@@ -107,6 +107,7 @@ namespace PHWAndriod.ViewModels
                 {
                     ProductName = result[0].ItemName;
                     Description = result[0].ItemDescription;
+                    Material = result[0].MaterialType;
                     foreach (CancelBookingModel model in result)
                     {
                         var finalModel = new CancelBookingFinalModel(model);
