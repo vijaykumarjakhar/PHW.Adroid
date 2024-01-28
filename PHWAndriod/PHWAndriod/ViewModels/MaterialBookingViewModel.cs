@@ -12,7 +12,9 @@ namespace PHWAndriod.ViewModels
         AppLogic logic = new AppLogic();
 
         #region Properties
+        private int gradeId { get; set; }
 
+        private BookingDispatchProductDetailListModel bookingModel;
         private List<PickListModel> pickList;
         public List<PickListModel> PickList
         {
@@ -167,11 +169,100 @@ namespace PHWAndriod.ViewModels
             }
         }
 
+        private int reqQty;
+        public int ReqQty
+        {
+            get { return reqQty; }
+            set
+            {
+                reqQty = value;
+                OnPropertyChanged(nameof(ReqQty));
+            }
+        }
+
+        private int outQty;
+        public int OutQty
+        {
+            get { return outQty; }
+            set
+            {
+                outQty = value;
+                OnPropertyChanged(nameof(OutQty));
+            }
+        }
+
+        private int boxQty;
+        public int BoxQty
+        {
+            get { return boxQty; }
+            set
+            {
+                boxQty = value;
+                OnPropertyChanged(nameof(BoxQty));
+            }
+        }
+
+        private int spoolQty;
+        public int SpoolQty
+        {
+            get { return spoolQty; }
+            set
+            {
+                spoolQty = value;
+                OnPropertyChanged(nameof(SpoolQty));
+            }
+        }
+
+        private string packType;
+        public string PackType
+        {
+            get { return packType; }
+            set
+            {
+                packType = value;
+                OnPropertyChanged(nameof(PackType));
+            }
+        }
+
+        private string grade;
+        public string Grade
+        {
+            get { return grade; }
+            set
+            {
+                grade = value;
+                OnPropertyChanged(nameof(Grade));
+            }
+        }
+
+        private string barcodeNumber;
+        public string BarcodeNumber
+        {
+            get { return barcodeNumber; }
+            set
+            {
+                barcodeNumber = value;
+                OnPropertyChanged(nameof(BarcodeNumber));
+            }
+        }
+
+        private string lastScan;
+        public string LastScan
+        {
+            get { return lastScan; }
+            set
+            {
+                lastScan = value;
+                OnPropertyChanged(nameof(LastScan));
+            }
+        }
+
         public Command PickListSelectedIndexChangedCommand { get; }
         public Command ProductListSelectedIndexChangedCommand { get; }
         public Command SpoolListSelectedIndexChangedCommand { get; }
         public Command ConditionListSelectedIndexChangedCommand { get; }
         public Command SizeListSelectedIndexChangedCommand { get; }
+        public Command GetDispatchBarcodeDetailCommand { get; }
         public Command ClearCommand { get; }
 
         #endregion
@@ -185,14 +276,56 @@ namespace PHWAndriod.ViewModels
             SpoolListSelectedIndexChangedCommand = new Command(LoadConditionList);
             ConditionListSelectedIndexChangedCommand = new Command(LoadSizeList);
             SizeListSelectedIndexChangedCommand = new Command(LoadData);
+            GetDispatchBarcodeDetailCommand = new Command(GetBookingBarcodeDetails);
         }
 
-        private async void ExecuteClearCommand(object obj)
+        private async void GetBookingBarcodeDetails()
+        {
+            IsBusy = true;
+            try
+            {
+                var result = await logic.GetBookingBarcodeDetail(PackType, SpoolList[SelectedSpoolListIndex].SpoolId, ConditionList[SelectedConditionListIndex].ConditionId, SizeList[SelectedSizeListIndex].SizeId,
+                   gradeId, ProductList[SelectedProductListIndex].ItemId, BarcodeNumber);
+                if (result != null)
+                {
+                    BoxQty = result[0].BoxQty;
+                    SpoolQty = result[0].SpoolQty;
+
+                    foreach (BookingBarcodeDetailModel model in result)
+                    {
+                        BookingBarcodeFinalDetailModel finalModel = new BookingBarcodeFinalDetailModel(model, PickList[SelectedPickListIndex], bookingModel, ProductList[SelectedProductListIndex]);
+                        var resopnse = await logic.AddOperationBookingStockOutChild(finalModel);
+                        if (resopnse)
+                        {
+                            LastScan = BarcodeNumber;
+                            OutQty += 1;
+                            bookingModel.OutQty = OutQty;
+                            if (OutQty >= ReqQty)
+                            {
+                                IsBusy = false;
+                                await App.Current.MainPage.DisplayAlert("PHW", "Required Qty fullfilled", "Ok");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    BarcodeNumber = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "MaterialBookingViewModel - GetDispactBarcodeDetails");
+            }
+            IsBusy = false;
+        }
+
+        private async void ExecuteClearCommand()
         {
             try
             {
                 InitaliseScreen();
-                //BarcodeNumber = string.Empty;
+                BarcodeNumber = string.Empty;
             }
             catch (Exception ex)
             {
@@ -210,6 +343,14 @@ namespace PHWAndriod.ViewModels
                     () => LoadSpoolList(),
                     () => LoadConditionList(),
                     () => LoadSizeList());
+
+                ReqQty = 0;
+                OutQty = 0;
+                PackType = string.Empty;
+                Grade = string.Empty;
+                BoxQty = 0;
+                SpoolQty = 0;
+                LastScan = string.Empty;
             }
             catch (Exception ex)
             {
@@ -217,8 +358,35 @@ namespace PHWAndriod.ViewModels
             }
         }
 
-        private void LoadData(object obj)
+        private async void LoadData()
         {
+            IsBusy = true;
+            try
+            {
+                if (SelectedSizeListIndex > 0)
+                {
+                    var result = await logic.GetBookingProductdetail(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId, SpoolList[SelectedSpoolListIndex].SpoolId, ConditionList[SelectedConditionListIndex].ConditionId, SizeList[SelectedSizeListIndex].SizeId);
+                    if (result != null && result.Count > 0)
+                    {
+                        ReqQty = result[0].BoxQty;
+                        OutQty = result[0].OutQty;
+                        PackType = result[0].PackType;
+                        Grade = result[0].Grade;
+                        gradeId = result[0].GradeId;
+                        bookingModel = result[0];
+                        if (OutQty >= ReqQty)
+                        {
+                            IsBusy = false;
+                            await App.Current.MainPage.DisplayAlert("PHW", "Required Qty fullfilled", "Ok");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "MaterialBookingViewModel - LoadData");
+            }
+            IsBusy = false;
         }
 
         private async void LoadPickList()

@@ -542,6 +542,64 @@ namespace PHWAndriod.Services
 
         #region Booking
 
+        public async Task<List<BookingBarcodeDetailModel>> GetBookingBarcodeDetail(string packType, int spoolId, int conditionId, int sizeId, int gradeId, int itemId, string scanBarcode)
+        {
+            List<BookingBarcodeDetailModel> data = new List<BookingBarcodeDetailModel>();
+            try
+            {
+
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = $"{BaseURL}api/BookingStock/BookingStock_GetScanBarcodeDetail?&PackType={packType}&SpoolId={spoolId}&ConditionId={conditionId}&SizeId={sizeId}&GradeId={gradeId}&ScanBarcode={scanBarcode}&ItemId={itemId}";
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        data = JsonConvert.DeserializeObject<List<BookingBarcodeDetailModel>>(content);
+                        return data;
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Paramhans Wires", response.ReasonPhrase, "Ok");
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "AppLogic - GetBookingBarcodeDetail");
+                return null;
+            }
+        }
+
+        public async Task<bool> AddOperationBookingStockOutChild(BookingBarcodeFinalDetailModel request)
+        {
+            bool data = false;
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = $"{BaseURL}api/BookingStock/addOperationBookingStockIn_StockBookChild";
+
+                    string jsonData = JsonConvert.SerializeObject(request);
+                    HttpContent requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, requestContent);
+
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "AppLogic - AddOperationBookingStockOutChild");
+            }
+            return data;
+        }
+
         #endregion
     }
 }
