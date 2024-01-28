@@ -78,17 +78,17 @@
                         <Label Text="{Binding OutQty}" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="#FFA500"/>
                     </StackLayout>
 
-                    <Entry Placeholder="Enter Barcode" Grid.Row="6" Grid.Column="0" ReturnCommand="{Binding GetStockInBarcodeDetailCommand}" Text="{Binding BarcodeNumber}"/>
+                    <Entry Placeholder="Enter Barcode" Grid.Row="6" Grid.Column="0" ReturnCommand="{Binding GetDispatchBarcodeDetailCommand}" Text="{Binding BarcodeNumber}"/>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                             <Label Text="Pack Type :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
-                            <Label Text="Box" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
+                            <Label Text="{Binding PackType}" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                             <Label Text="Grade :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
-                            <Label Text="Box" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
+                            <Label Text="{Binding Grade}" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
                         </StackLayout>
 
                    
@@ -96,12 +96,12 @@
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                             <Label Text="Box Qty :" TextColor="#FF0000" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
-                            <Label Text="Box" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
+                            <Label Text="{Binding BoxQty}" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                             <Label Text="Spool Qty :" TextColor="#FF0000" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
-                            <Label Text="Box" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
+                            <Label Text="{Binding SpoolQty}" FontSize="20" Padding="5,0,0,0" FontAttributes="Bold" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="#FFA500"/>
                         </StackLayout>
                     </StackLayout>
 
