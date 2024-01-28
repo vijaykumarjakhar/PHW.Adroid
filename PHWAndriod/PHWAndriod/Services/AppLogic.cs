@@ -102,66 +102,46 @@ namespace PHWAndriod.Services
         #endregion
 
         #region PhysicalVerification
-        public async Task<PhysicalListModel> GetPhysicalList()
+
+        public async Task<List<PhysicalListModel>> GetPhysicalListBarcode(string scanBarcode)
         {
-            PhysicalListModel data = new PhysicalListModel();
+            List<PhysicalListModel> data = new List<PhysicalListModel>();
             try
             {
+
                 using (HttpClient client = new HttpClient())
                 {
-                    string apiUrl = $"{BaseURL}api/PhysicalVerification/getphysicallist";
+                    string apiUrl = $"{BaseURL}api/PhysicalVerification/getphysicallistbyBarcode?ScanBarcode={scanBarcode}";
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
                     if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
-                        data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
+                        data = JsonConvert.DeserializeObject<List<PhysicalListModel>>(content);
                         return data;
                     }
                     else
-                        return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                ExceptionHandler.HandleException(ex, "AppLogic - GetPhysicalList");
-                return null;
-            }
-        }
-        public async Task<PhysicalListModel> GetPhysicalListById(int id, string createdBy)
-        {
-            PhysicalListModel data = new PhysicalListModel();
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    string apiUrl = $"{BaseURL}api/PhysicalVerification/getphysicallistbyid?id={id}&CreatedBY={createdBy}";
-                    HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        string content = await response.Content.ReadAsStringAsync();
-                        data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
-                        return data;
-                    }
-                    else
+                        await App.Current.MainPage.DisplayAlert("Paramhans Wires", response.ReasonPhrase, "Ok");
                         return null;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex, "AppLogic - GetPhysicalListById");
+                ExceptionHandler.HandleException(ex, "AppLogic - GetPhysicalListBarcode");
                 return null;
             }
         }
-        public async Task<PhysicalListModel> AddOperationPhysicalVerify(PhysicalListModel request)
+
+        public async Task<bool> AddOperationPhysicalList(PhysicalFinalListModel request)
         {
-            PhysicalListModel data = new PhysicalListModel();
+            bool data = false;
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string apiUrl = $"{BaseURL}api/PhysicalVerification/addOperationPhysicalVerfiy";
+                    string apiUrl = $"{BaseURL}/api/PhysicalVerification/addOperationPhysicalVerfiy";
 
                     string jsonData = JsonConvert.SerializeObject(request);
                     HttpContent requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -170,74 +150,15 @@ namespace PHWAndriod.Services
 
                     if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        string content = await response.Content.ReadAsStringAsync();
-                        data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
-                        return data;
+                        return true;
                     }
-                    else
-                        return null;
                 }
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex, "AppLogic - AddOperationPhysicalVerify");
-                return null;
+                ExceptionHandler.HandleException(ex, "AppLogic - AddOperationPhysicalList");
             }
-        }
-        public async Task<PhysicalListModel> UpdateOperationPhysicalVerfiy(PhysicalListModel request)
-        {
-            PhysicalListModel data = new PhysicalListModel();
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    string apiUrl = $"{BaseURL}api/PhysicalVerification/updateOperationPhysicalVerfiy";
-
-                    string jsonData = JsonConvert.SerializeObject(request);
-                    HttpContent requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-                    HttpResponseMessage response = await client.PutAsync(apiUrl, requestContent);
-
-                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        string content = await response.Content.ReadAsStringAsync();
-                        data = JsonConvert.DeserializeObject<PhysicalListModel>(content);
-                        return data;
-                    }
-                    else
-                        return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                ExceptionHandler.HandleException(ex, "AppLogic - UpdateOperationPhysicalVerfiy");
-                return null;
-            }
-        }
-        public async Task<bool> DeleteOperationPhysical(int id)
-        {
-            bool data = false;
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    string apiUrl = $"{BaseURL}api/PhysicalVerification/deleteOperationPhysical?Id={id}";
-
-                    HttpResponseMessage response = await client.DeleteAsync(apiUrl);
-
-                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        return data = true;
-                    }
-                    else
-                        return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                ExceptionHandler.HandleException(ex, "AppLogic - DeleteOperationPhysical");
-                return false;
-            }
+            return data;
         }
         #endregion
 

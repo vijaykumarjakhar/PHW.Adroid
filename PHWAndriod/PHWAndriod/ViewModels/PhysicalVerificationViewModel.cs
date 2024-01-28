@@ -1,4 +1,5 @@
-﻿using PHWAndriod.Services;
+﻿using PHWAndriod.Models;
+using PHWAndriod.Services;
 using System;
 using Xamarin.Forms;
 
@@ -82,15 +83,37 @@ namespace PHWAndriod.ViewModels
             Title = "Physical Verification";
             ClearCommand = new Command(ExecuteClearCommand);
             GetBarcodeDetailCommand = new Command(GetBarcodeDetails);
+            ScanCount = 0;
+            LastScan = string.Empty;
         }
 
-        private void GetBarcodeDetails(object obj)
+        private async void GetBarcodeDetails()
         {
             try
             {
                 IsBusy = true;
-                //var result = logic.GetPhysicalList();
-                //TODO: populate data
+                var result = await logic.GetPhysicalListBarcode(BarcodeEntry);
+                if (result != null && result.Count > 0)
+                {
+                    ProductName = result[0].ItemName;
+                    Description = result[0].ItemDescription;
+                    foreach (PhysicalListModel model in result)
+                    {
+                        var finalModel = new PhysicalFinalListModel(model);
+                        var response = await logic.AddOperationPhysicalList(finalModel);
+                        if (response)
+                        {
+                            IsBarcodeLayoutVisible = true;
+                            ScanCount += 1;
+                            LastScan = BarcodeEntry;
+                        }
+                    }
+                }
+                else
+                {
+                    IsBarcodeLayoutVisible = false;
+                    BarcodeEntry = string.Empty;
+                }
             }
             catch (Exception ex)
             {
@@ -106,6 +129,8 @@ namespace PHWAndriod.ViewModels
             {
                 IsBarcodeLayoutVisible = false;
                 BarcodeEntry = string.Empty;
+                ScanCount = 0;
+                LastScan = string.Empty;
             }
             catch (Exception ex)
             {
