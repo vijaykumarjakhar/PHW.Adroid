@@ -162,6 +162,68 @@ namespace PHWAndriod.Services
         }
         #endregion
 
+        #region Cancel Booking
+
+        public async Task<List<CancelBookingModel>> GetCancelBookingListBarcode(string scanBarcode)
+        {
+            List<CancelBookingModel> data = new List<CancelBookingModel>();
+            try
+            {
+
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = $"{BaseURL}api/BookingStock/CancelBookingStock_GetScanBarcodeDetail?ScanBarcode={scanBarcode}";
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        data = JsonConvert.DeserializeObject<List<CancelBookingModel>>(content);
+                        return data;
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Paramhans Wires", response.ReasonPhrase, "Ok");
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "AppLogic - GetPhysicalListBarcode");
+                return null;
+            }
+        }
+
+        public async Task<bool> AddOperationCancelBookingList(CancelBookingFinalModel request)
+        {
+            bool data = false;
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = $"{BaseURL}/api/BookingStock/addOperation_CancelBookingStock";
+
+                    string jsonData = JsonConvert.SerializeObject(request);
+                    HttpContent requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, requestContent);
+
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "AppLogic - AddOperationCancelBookingList");
+            }
+            return data;
+        }
+
+        #endregion
+
         #region PickListMaster
 
         public async Task<List<PickListModel>> PickListMasterList()
