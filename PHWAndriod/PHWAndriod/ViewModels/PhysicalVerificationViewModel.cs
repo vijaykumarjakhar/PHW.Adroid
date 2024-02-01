@@ -112,8 +112,8 @@ namespace PHWAndriod.ViewModels
                 else
                 {
                     IsBarcodeLayoutVisible = false;
-                    BarcodeEntry = string.Empty;
                 }
+                BarcodeEntry = string.Empty;
             }
             catch (Exception ex)
             {

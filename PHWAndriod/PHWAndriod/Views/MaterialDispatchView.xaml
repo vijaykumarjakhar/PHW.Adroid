@@ -30,7 +30,7 @@
                         </Picker>
                     </StackLayout>
 
-                    <StackLayout IsEnabled="{Binding IsProductListEnabled}" Orientation="Horizontal" Spacing="30" >
+                    <StackLayout Orientation="Horizontal" Spacing="30" >
                         <Label Text="Product :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
                         <Picker SelectedIndex="{Binding SelectedProductListIndex}" ItemsSource="{Binding ProductList}" ItemDisplayBinding="{Binding ItemName}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Picker.Behaviors>
@@ -40,7 +40,7 @@
                         </Picker>
                     </StackLayout>
 
-                    <StackLayout IsEnabled="{Binding IsSpoolListEnabled}" Orientation="Horizontal" Spacing="30" >
+                    <StackLayout Orientation="Horizontal" Spacing="30" >
                         <Label Text="Spool :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
                         <Picker SelectedIndex="{Binding SelectedSpoolListIndex}" ItemsSource="{Binding SpoolList}" ItemDisplayBinding="{Binding Spool}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Picker.Behaviors>
@@ -50,7 +50,7 @@
                         </Picker>
                     </StackLayout>
 
-                    <StackLayout IsEnabled="{Binding IsConditionListEnabled}" Orientation="Horizontal" Spacing="30" >
+                    <StackLayout Orientation="Horizontal" Spacing="30" >
                         <Label Text="Condition :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
                         <Picker SelectedIndex="{Binding SelectedConditionListIndex}" ItemsSource="{Binding ConditionList}" ItemDisplayBinding="{Binding Condition}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Picker.Behaviors>
@@ -60,7 +60,7 @@
                         </Picker>
                     </StackLayout>
 
-                    <StackLayout IsEnabled="{Binding IsSizeListEnabled}" Orientation="Horizontal" Spacing="30" >
+                    <StackLayout Orientation="Horizontal" Spacing="30" >
                         <Label Text="Size :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
                         <Picker SelectedIndex="{Binding SelectedSizeListIndex}" ItemsSource="{Binding SizeList}" ItemDisplayBinding="{Binding Size}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Picker.Behaviors>

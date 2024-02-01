@@ -159,6 +159,7 @@ namespace PHWAndriod.ViewModels
                             LastScan = BarcodeNumber;
                         }
                     }
+                    BarcodeNumber = string.Empty;
                 }
             }
             catch (Exception ex)

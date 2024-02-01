@@ -2,7 +2,6 @@
 using PHWAndriod.Services;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace PHWAndriod.ViewModels
@@ -122,50 +121,6 @@ namespace PHWAndriod.ViewModels
             {
                 selectedSizeListIndex = value;
                 OnPropertyChanged(nameof(SelectedSizeListIndex));
-            }
-        }
-
-        private bool isConditionListEnabled;
-        public bool IsConditionListEnabled
-        {
-            get { return isConditionListEnabled; }
-            set
-            {
-                isConditionListEnabled = value;
-                OnPropertyChanged(nameof(IsConditionListEnabled));
-            }
-        }
-
-        private bool isSpoolListEnabled;
-        public bool IsSpoolListEnabled
-        {
-            get { return isSpoolListEnabled; }
-            set
-            {
-                isSpoolListEnabled = value;
-                OnPropertyChanged(nameof(IsSpoolListEnabled));
-            }
-        }
-
-        private bool isProductListEnabled;
-        public bool IsProductListEnabled
-        {
-            get { return isProductListEnabled; }
-            set
-            {
-                isProductListEnabled = value;
-                OnPropertyChanged(nameof(IsProductListEnabled));
-            }
-        }
-
-        private bool isSizeListEnabled;
-        public bool IsSizeListEnabled
-        {
-            get { return isSizeListEnabled; }
-            set
-            {
-                isSizeListEnabled = value;
-                OnPropertyChanged(nameof(IsSizeListEnabled));
             }
         }
 
@@ -308,10 +263,7 @@ namespace PHWAndriod.ViewModels
                         }
                     }
                 }
-                else
-                {
-                    BarcodeNumber = string.Empty;
-                }
+                BarcodeNumber = string.Empty;
             }
             catch (Exception ex)
             {
@@ -320,11 +272,16 @@ namespace PHWAndriod.ViewModels
             IsBusy = false;
         }
 
-        private async void ExecuteClearCommand()
+        private void ExecuteClearCommand()
         {
             try
             {
                 InitaliseScreen();
+                SelectedPickListIndex = 0;
+                SelectedProductListIndex = 0;
+                SelectedSpoolListIndex = 0;
+                SelectedConditionListIndex = 0;
+                SelectedSizeListIndex = 0;
                 BarcodeNumber = string.Empty;
             }
             catch (Exception ex)
@@ -337,12 +294,11 @@ namespace PHWAndriod.ViewModels
         {
             try
             {
-                Parallel.Invoke(
-                    () => LoadPickList(),
-                    () => LoadProductList(),
-                    () => LoadSpoolList(),
-                    () => LoadConditionList(),
-                    () => LoadSizeList());
+                LoadPickList();
+                LoadProductList();
+                LoadSpoolList();
+                LoadConditionList();
+                LoadSizeList();
 
                 ReqQty = 0;
                 OutQty = 0;
@@ -415,7 +371,6 @@ namespace PHWAndriod.ViewModels
             {
                 if (SelectedPickListIndex > 0)
                 {
-                    IsProductListEnabled = true;
                     var result = await logic.GetPickOutWiseProductList(PickList[SelectedPickListIndex].PickOutId);
                     if (result != null && result.Count > 0)
                     {
@@ -423,8 +378,6 @@ namespace PHWAndriod.ViewModels
                         SelectedProductListIndex = 0;
                     }
                 }
-                else
-                    IsProductListEnabled = false;
             }
             catch (Exception ex)
             {
@@ -440,7 +393,6 @@ namespace PHWAndriod.ViewModels
             {
                 if (SelectedSpoolListIndex > 0)
                 {
-                    IsConditionListEnabled = true;
                     var result = await logic.GetPickOutWiseProductWiseSpoolWiseConditionList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId, SpoolList[SelectedSpoolListIndex].SpoolId);
                     if (result != null && result.Count > 0)
                     {
@@ -448,8 +400,6 @@ namespace PHWAndriod.ViewModels
                         SelectedConditionListIndex = 0;
                     }
                 }
-                else
-                    IsConditionListEnabled = false;
             }
             catch (Exception ex)
             {
@@ -465,7 +415,6 @@ namespace PHWAndriod.ViewModels
             {
                 if (SelectedProductListIndex > 0)
                 {
-                    IsSpoolListEnabled = true;
                     var result = await logic.GetPickOutWiseProductWiseSpoolList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId);
                     if (result != null && result.Count > 0)
                     {
@@ -473,8 +422,6 @@ namespace PHWAndriod.ViewModels
                         SelectedSpoolListIndex = 0;
                     }
                 }
-                else
-                    IsSpoolListEnabled = false;
             }
             catch (Exception ex)
             {
@@ -490,7 +437,6 @@ namespace PHWAndriod.ViewModels
             {
                 if (selectedConditionListIndex > 0)
                 {
-                    IsSizeListEnabled = true;
                     var result = await logic.GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId, SpoolList[SelectedSpoolListIndex].SpoolId, ConditionList[SelectedConditionListIndex].ConditionId);
                     if (result != null && result.Count > 0)
                     {
@@ -498,8 +444,6 @@ namespace PHWAndriod.ViewModels
                         SelectedSizeListIndex = 0;
                     }
                 }
-                else
-                    IsSizeListEnabled = false;
             }
             catch (Exception ex)
             {
