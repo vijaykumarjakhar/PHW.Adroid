@@ -350,7 +350,7 @@ namespace PHWAndriod.ViewModels
             IsBusy = true;
             try
             {
-                var result = await logic.PickListMasterList();
+                var result = await logic.PickListMasterList(booking: true);
                 if (result != null && result.Count > 0)
                 {
                     PickList = result;
@@ -371,7 +371,7 @@ namespace PHWAndriod.ViewModels
             {
                 if (SelectedPickListIndex > 0)
                 {
-                    var result = await logic.GetPickOutWiseProductList(PickList[SelectedPickListIndex].PickOutId);
+                    var result = await logic.GetPickOutWiseProductList(PickList[SelectedPickListIndex].PickOutId, booking: true);
                     if (result != null && result.Count > 0)
                     {
                         ProductList = result;
@@ -393,7 +393,7 @@ namespace PHWAndriod.ViewModels
             {
                 if (SelectedSpoolListIndex > 0)
                 {
-                    var result = await logic.GetPickOutWiseProductWiseSpoolWiseConditionList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId, SpoolList[SelectedSpoolListIndex].SpoolId);
+                    var result = await logic.GetPickOutWiseProductWiseSpoolWiseConditionList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId, SpoolList[SelectedSpoolListIndex].SpoolId, booking: true);
                     if (result != null && result.Count > 0)
                     {
                         ConditionList = result;
@@ -415,7 +415,7 @@ namespace PHWAndriod.ViewModels
             {
                 if (SelectedProductListIndex > 0)
                 {
-                    var result = await logic.GetPickOutWiseProductWiseSpoolList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId);
+                    var result = await logic.GetPickOutWiseProductWiseSpoolList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId, booking: true);
                     if (result != null && result.Count > 0)
                     {
                         SpoolList = result;
@@ -437,7 +437,7 @@ namespace PHWAndriod.ViewModels
             {
                 if (selectedConditionListIndex > 0)
                 {
-                    var result = await logic.GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId, SpoolList[SelectedSpoolListIndex].SpoolId, ConditionList[SelectedConditionListIndex].ConditionId);
+                    var result = await logic.GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList(PickList[SelectedPickListIndex].PickOutId, ProductList[SelectedProductListIndex].ItemId, SpoolList[SelectedSpoolListIndex].SpoolId, ConditionList[SelectedConditionListIndex].ConditionId, booking: true);
                     if (result != null && result.Count > 0)
                     {
                         SizeList = result;

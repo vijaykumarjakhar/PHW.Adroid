@@ -43,9 +43,9 @@ namespace PHWAndriod.Services
         #endregion
 
         #region MasterMapping
-        public async Task<ChildBarcodeDetailModel> GetScanChildBarcodeDetail(string material, string item, string barcode)
+        public async Task<List<ChildBarcodeDetailModel>> GetScanChildBarcodeDetail(string material, string item, string barcode)
         {
-            ChildBarcodeDetailModel data = new ChildBarcodeDetailModel();
+            List<ChildBarcodeDetailModel> data = new List<ChildBarcodeDetailModel>();
             try
             {
 
@@ -57,7 +57,7 @@ namespace PHWAndriod.Services
                     if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
-                        data = JsonConvert.DeserializeObject<ChildBarcodeDetailModel>(content);
+                        data = JsonConvert.DeserializeObject<List<ChildBarcodeDetailModel>>(content);
                         return data;
                     }
                     else
@@ -71,9 +71,9 @@ namespace PHWAndriod.Services
             }
         }
 
-        public async Task<MasterBarcodeDetailModel> GetScanMasterBarcodeDetail(string barcode)
+        public async Task<List<MasterBarcodeDetailModel>> GetScanMasterBarcodeDetail(string barcode)
         {
-            MasterBarcodeDetailModel data = new MasterBarcodeDetailModel();
+            List<MasterBarcodeDetailModel> data = new List<MasterBarcodeDetailModel>();
             try
             {
 
@@ -85,7 +85,7 @@ namespace PHWAndriod.Services
                     if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string content = await response.Content.ReadAsStringAsync();
-                        data = JsonConvert.DeserializeObject<MasterBarcodeDetailModel>(content);
+                        data = JsonConvert.DeserializeObject<List<MasterBarcodeDetailModel>>(content);
                         return data;
                     }
                     else
@@ -97,6 +97,33 @@ namespace PHWAndriod.Services
                 ExceptionHandler.HandleException(ex, "AppLogic - GetScanMasterBarcodeDetail");
                 return null;
             }
+        }
+
+        public async Task<bool> AddOperationMasterChildMapping(MasterChildMappingFinalDetailModel request)
+        {
+            bool data = false;
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string apiUrl = $"{BaseURL}api/MasterMapping/addOperationMasterChildMapping";
+
+                    string jsonData = JsonConvert.SerializeObject(request);
+                    HttpContent requestContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, requestContent);
+
+                    if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, "AppLogic - AddOperationMasterChildMapping");
+            }
+            return data;
         }
 
         #endregion
@@ -226,7 +253,7 @@ namespace PHWAndriod.Services
 
         #region PickListMaster
 
-        public async Task<List<PickListModel>> PickListMasterList()
+        public async Task<List<PickListModel>> PickListMasterList(bool booking = false)
         {
             List<PickListModel> itemList = new List<PickListModel>();
             try
@@ -234,7 +261,15 @@ namespace PHWAndriod.Services
 
                 using (HttpClient client = new HttpClient())
                 {
-                    string apiUrl = $"{BaseURL}PickListMasterList";
+                    string apiUrl = string.Empty;
+                    if (booking)
+                    {
+                        apiUrl = $"{BaseURL}Booking_PickListMasterList";
+                    }
+                    else
+                    {
+                        apiUrl = $"{BaseURL}Dispatch_PickListMasterList";
+                    }
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
                     if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -253,7 +288,7 @@ namespace PHWAndriod.Services
                 return null;
             }
         }
-        public async Task<List<PickOutProductListModel>> GetPickOutWiseProductList(int pickOutId)
+        public async Task<List<PickOutProductListModel>> GetPickOutWiseProductList(int pickOutId, bool booking = false)
         {
             List<PickOutProductListModel> itemList = new List<PickOutProductListModel>();
             try
@@ -261,7 +296,15 @@ namespace PHWAndriod.Services
 
                 using (HttpClient client = new HttpClient())
                 {
-                    string apiUrl = $"{BaseURL}GetPickOutWiseProductList?PickOutId={pickOutId}";
+                    string apiUrl = string.Empty;
+                    if (booking)
+                    {
+                        apiUrl = $"{BaseURL}Booking_GetPickOutWiseProductList?PickOutId={pickOutId}";
+                    }
+                    else
+                    {
+                        apiUrl = $"{BaseURL}Dispatch_GetPickOutWiseProductList?PickOutId={pickOutId}";
+                    }
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
                     if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -280,7 +323,7 @@ namespace PHWAndriod.Services
                 return null;
             }
         }
-        public async Task<List<PickOutProductSpoolModel>> GetPickOutWiseProductWiseSpoolList(int pickOutId, int productId)
+        public async Task<List<PickOutProductSpoolModel>> GetPickOutWiseProductWiseSpoolList(int pickOutId, int productId, bool booking = false)
         {
             List<PickOutProductSpoolModel> result = new List<PickOutProductSpoolModel>();
             try
@@ -288,7 +331,15 @@ namespace PHWAndriod.Services
 
                 using (HttpClient client = new HttpClient())
                 {
-                    string apiUrl = $"{BaseURL}GetPickOutWiseProductWiseSpoolList?PickOutId={pickOutId}&ItemId={productId}";
+                    string apiUrl = string.Empty;
+                    if (booking)
+                    {
+                        apiUrl = $"{BaseURL}Booking_GetPickOutWiseProductWiseSpoolList?PickOutId={pickOutId}&ItemId={productId}";
+                    }
+                    else
+                    {
+                        apiUrl = $"{BaseURL}Dispatch_GetPickOutWiseProductWiseSpoolList?PickOutId={pickOutId}&ItemId={productId}";
+                    }
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
                     if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -307,7 +358,7 @@ namespace PHWAndriod.Services
                 return null;
             }
         }
-        public async Task<List<PickOutProductSpoolConditionModel>> GetPickOutWiseProductWiseSpoolWiseConditionList(int pickOutId, int productId, int spoolId)
+        public async Task<List<PickOutProductSpoolConditionModel>> GetPickOutWiseProductWiseSpoolWiseConditionList(int pickOutId, int productId, int spoolId, bool booking = false)
         {
             List<PickOutProductSpoolConditionModel> data = new List<PickOutProductSpoolConditionModel>();
             try
@@ -315,7 +366,15 @@ namespace PHWAndriod.Services
 
                 using (HttpClient client = new HttpClient())
                 {
-                    string apiUrl = $"{BaseURL}GetPickOutWiseProductWiseSpoolWiseConditionList?PickOutId={pickOutId}&ItemId={productId}&SpoolId={spoolId}";
+                    string apiUrl = string.Empty;
+                    if (booking)
+                    {
+                        apiUrl = $"{BaseURL}Booking_GetPickOutWiseProductWiseSpoolWiseConditionList?PickOutId={pickOutId}&ItemId={productId}&SpoolId={spoolId}";
+                    }
+                    else
+                    {
+                        apiUrl = $"{BaseURL}Dispatch_GetPickOutWiseProductWiseSpoolWiseConditionList?PickOutId={pickOutId}&ItemId={productId}&SpoolId={spoolId}";
+                    }
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
                     if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -334,7 +393,7 @@ namespace PHWAndriod.Services
                 return null;
             }
         }
-        public async Task<List<PickOutProductSpoolConditionSizeModel>> GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList(int pickOutId, int productId, int spoolId, int conditionId)
+        public async Task<List<PickOutProductSpoolConditionSizeModel>> GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList(int pickOutId, int productId, int spoolId, int conditionId, bool booking = false)
         {
             List<PickOutProductSpoolConditionSizeModel> data = new List<PickOutProductSpoolConditionSizeModel>();
             try
@@ -342,7 +401,15 @@ namespace PHWAndriod.Services
 
                 using (HttpClient client = new HttpClient())
                 {
-                    string apiUrl = $"{BaseURL}GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList?PickOutId={pickOutId}&ItemId={productId}&SpoolId={spoolId}&ConditionId={conditionId}";
+                    string apiUrl = string.Empty;
+                    if (booking)
+                    {
+                        apiUrl = $"{BaseURL}Booking_GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList?PickOutId={pickOutId}&ItemId={productId}&SpoolId={spoolId}&ConditionId={conditionId}";
+                    }
+                    else
+                    {
+                        apiUrl = $"{BaseURL}Dispatch_GetPickOutWiseProductWiseSpoolWiseConditionWiseSizeList?PickOutId={pickOutId}&ItemId={productId}&SpoolId={spoolId}&ConditionId={conditionId}";
+                    }
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
                     if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)

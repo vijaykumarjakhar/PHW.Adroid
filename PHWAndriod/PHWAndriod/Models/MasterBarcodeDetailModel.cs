@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PHWAndriod.Models
+﻿namespace PHWAndriod.Models
 {
     public class MasterBarcodeDetailModel
     {

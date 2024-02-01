@@ -39,10 +39,22 @@
                     </Grid>
                     
                     <Label Grid.Row="2" Grid.Column="0" Text="Child Barcode : " VerticalOptions="Center" Margin="0,15,0,0" FontSize="20" FontAttributes="Bold" />
-                    <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Barcode" VerticalOptions="Start" Margin="0,15,0,0" ReturnCommand="{Binding GetChildBarcodeDetailCommand}" Text="{Binding BarcodeEntry}"/>
+                    <Entry Grid.Row="2" Grid.Column="1" Placeholder="Enter Barcode" VerticalOptions="Start" Margin="0,15,0,0" ReturnCommand="{Binding GetChildBarcodeDetailCommand}" Text="{Binding ChildBarcodeEntry}"/>
 
-                    <Label IsVisible="{Binding IsChildBarcodeLayoutVisible}" Grid.Row="3" Grid.Column="0" Text="Scan Count :" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF0000"/>
-                    <Label IsVisible="{Binding IsChildBarcodeLayoutVisible}" Grid.Row="3" Grid.Column="1" Text="{Binding ScanCount}" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FFA500"/>
+                    <Label Grid.Row="3" Grid.ColumnSpan="2" TextColor="#FF0000" IsVisible="{Binding IsChildBarcodeLayoutVisible}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="Large" Text="Scanned Barcode List"/>
+                    <StackLayout Grid.Row="4" Grid.Column="1">
+
+                        <Label IsVisible="{Binding IsChildBarcodeLayoutVisible}" Text="Scan Count :" FontSize="20" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="#FF0000"/>
+                        <Label IsVisible="{Binding IsChildBarcodeLayoutVisible}" Text="{Binding ScanCount}" FontSize="20" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="#FFA500"/>
+                    </StackLayout>
+
+                    <CollectionView IsVisible="{Binding IsChildBarcodeLayoutVisible}" Grid.Row="4" Grid.Column="0" ItemsSource="{Binding Barcodes}" HeightRequest="50" WidthRequest="50" BackgroundColor="#e9e9e9">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label FontSize="Large" Text="{Binding Number}" TextColor="#FFA500" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </Grid>
                 <Button Text="Map Barcode"  VerticalOptions="EndAndExpand" Command="{Binding MapBarcodeCommand}"
                         FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" />
