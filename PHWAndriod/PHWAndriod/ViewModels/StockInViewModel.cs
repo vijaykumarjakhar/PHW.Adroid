@@ -151,12 +151,15 @@ namespace PHWAndriod.ViewModels
                         Spool = result[0].Spool;
                         Grade = result[0].Grade;
                         Boxes = result[0].BoxQty;
-                        StockInFinalDetailModel data = new StockInFinalDetailModel(result[0]);
-                        var response = await logic.AddOperationStockInFinalInventory(data);
-                        if (response)
+                        foreach (StockInBarcodeDetail item in result)
                         {
-                            ScanCount += 1;
-                            LastScan = BarcodeNumber;
+                            StockInFinalDetailModel data = new StockInFinalDetailModel(item);
+                            var response = await logic.AddOperationStockInFinalInventory(data);
+                            if (response)
+                            {
+                                ScanCount += 1;
+                                LastScan = BarcodeNumber;
+                            }
                         }
                     }
                     BarcodeNumber = string.Empty;

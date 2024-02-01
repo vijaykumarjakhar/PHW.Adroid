@@ -7,6 +7,7 @@ namespace PHWAndriod.ViewModels
 {
     public class PhysicalVerificationViewModel : BaseViewModel
     {
+        #region Properties
         private string barcodeEntry;
         public string BarcodeEntry
         {
@@ -77,6 +78,7 @@ namespace PHWAndriod.ViewModels
         public Command ClearCommand { get; }
 
         AppLogic logic = new AppLogic();
+        #endregion
 
         public PhysicalVerificationViewModel()
         {
