@@ -259,6 +259,8 @@ namespace PHWAndriod.ViewModels
                             {
                                 IsBusy = false;
                                 await App.Current.MainPage.DisplayAlert("PHW", "Required Qty fullfilled", "Ok");
+                                ExecuteClearCommand();
+
                             }
                         }
                     }
@@ -334,6 +336,7 @@ namespace PHWAndriod.ViewModels
                         {
                             IsBusy = false;
                             await App.Current.MainPage.DisplayAlert("PHW", "Required Qty fullfilled", "Ok");
+                            ExecuteClearCommand();
                         }
                     }
                 }

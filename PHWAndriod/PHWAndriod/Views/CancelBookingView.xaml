@@ -21,7 +21,7 @@
                            VerticalOptions="EndAndExpand"
                            HorizontalOptions="CenterAndExpand" />
                     <Label Grid.Row="0" Text="Cancel Book Stock" FontSize="30" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalOptions="Start"/>
-                    <Entry Grid.Row="1" Margin="0,10" Placeholder="Enter Barcode" ReturnCommand="{Binding GetBarcodeDetailCommand}" Text="{Binding BarcodeEntry}"/>
+                    <Entry x:Name="BarcodeEntry" Completed="BarcodeEntry_Completed" Grid.Row="1" Margin="0,10" Placeholder="Enter Barcode" ReturnCommand="{Binding GetBarcodeDetailCommand}" Text="{Binding BarcodeEntry}"/>
                     <Grid Grid.Row="2" x:Name="BarcodeDetailsLayout" IsVisible="{Binding IsBarcodeLayoutVisible}" RowSpacing="25" Padding="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
