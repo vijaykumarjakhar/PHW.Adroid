@@ -149,7 +149,7 @@ namespace PHWAndriod.Services
                     }
                     else
                     {
-                        await App.Current.MainPage.DisplayAlert("Paramhans Wires", response.ReasonPhrase, "Ok");
+                        //await App.Current.MainPage.DisplayAlert("Paramhans Wires", response.ReasonPhrase, "Ok");
                         return null;
                     }
                 }

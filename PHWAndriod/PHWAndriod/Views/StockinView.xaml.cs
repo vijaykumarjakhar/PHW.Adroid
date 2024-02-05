@@ -1,9 +1,4 @@
 ﻿using PHWAndriod.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,6 +11,18 @@ namespace PHWAndriod.Views
         public StockinView()
         {
             InitializeComponent();
+            this.BindingContext = new StockInViewModel();
+
+        }
+
+        private void BarcodeEntry_Completed(object sender, System.EventArgs e)
+        {
+            BarcodeEntry.Focus();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             this.BindingContext = new StockInViewModel();
         }
     }

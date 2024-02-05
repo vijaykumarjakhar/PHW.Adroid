@@ -113,7 +113,13 @@ namespace PHWAndriod.ViewModels
                 }
                 else
                 {
-                    IsBarcodeLayoutVisible = false;
+                    var finalModel = new PhysicalFinalListModel(new PhysicalListModel() { Id = 0, ScanBarcode = BarcodeEntry });
+                    var response = await logic.AddOperationPhysicalList(finalModel);
+                    IsBarcodeLayoutVisible = true;
+                    ScanCount += 1;
+                    LastScan = BarcodeEntry;
+                    ProductName = string.Empty;
+                    Description = string.Empty;
                 }
                 BarcodeEntry = string.Empty;
             }

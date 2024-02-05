@@ -1,9 +1,5 @@
 ﻿using PHWAndriod.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +11,17 @@ namespace PHWAndriod.Views
         public MaterialDispatchView()
         {
             InitializeComponent();
+            this.BindingContext = new MaterialDispatchViewModel();
+        }
+
+        private void BarcodeEntry_Completed(object sender, EventArgs e)
+        {
+            BarcodeEntry.Focus();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             this.BindingContext = new MaterialDispatchViewModel();
         }
     }
