@@ -170,6 +170,7 @@ namespace PHWAndriod.ViewModels
                 ExceptionHandler.HandleException(ex, "StockInViewModel - GetBarcodeInfo");
             }
             IsBusy = false;
+            MessagingCenter.Send(this, "StockInFocusBarcodeEntry");
         }
 
         private async void LoadInventoryType()

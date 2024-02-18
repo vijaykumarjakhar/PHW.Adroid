@@ -39,7 +39,7 @@
                     </Grid>
                     
                     <Label Grid.Row="2" Grid.Column="0" Text="Child Barcode : " VerticalOptions="Center" Margin="0,15,0,0" FontSize="20" FontAttributes="Bold" />
-                    <Entry x:Name="ChildBarcodeEntry" Completed="ChildBarcodeEntry_Completed" Grid.Row="2" Grid.Column="1" Placeholder="Enter Barcode" VerticalOptions="Start" Margin="0,15,0,0" ReturnCommand="{Binding GetChildBarcodeDetailCommand}" Text="{Binding ChildBarcodeEntry}"/>
+                    <Entry x:Name="ChildBarcodeEntry" Grid.Row="2" Grid.Column="1" Placeholder="Enter Barcode" VerticalOptions="Start" Margin="0,15,0,0" ReturnCommand="{Binding GetChildBarcodeDetailCommand}" Text="{Binding ChildBarcodeEntry}"/>
 
                     <Label Grid.Row="3" Grid.ColumnSpan="2" TextColor="#FF0000" IsVisible="{Binding IsChildBarcodeLayoutVisible}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="Large" Text="Scanned Barcode List"/>
                     <StackLayout Grid.Row="4" Grid.Column="1">

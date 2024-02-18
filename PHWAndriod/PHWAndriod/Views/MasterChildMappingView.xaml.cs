@@ -1,5 +1,4 @@
 ﻿using PHWAndriod.ViewModels;
-using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,12 +12,17 @@ namespace PHWAndriod.Views
         {
             InitializeComponent();
             this.BindingContext = new MasterChildMappingViewModel();
+
+            MessagingCenter.Subscribe<StockInViewModel>(this, "MasterChildFocusBarcodeEntry", (sender) =>
+            {
+                ChildBarcodeEntry.Focus();
+            });
         }
 
-        private void ChildBarcodeEntry_Completed(object sender, EventArgs e)
-        {
-            ChildBarcodeEntry.Focus();
-        }
+        //private void ChildBarcodeEntry_Completed(object sender, EventArgs e)
+        //{
+        //    ChildBarcodeEntry.Focus();
+        //}
 
         protected override void OnAppearing()
         {

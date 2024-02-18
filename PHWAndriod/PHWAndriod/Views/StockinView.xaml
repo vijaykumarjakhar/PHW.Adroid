@@ -9,7 +9,7 @@
                     <Label Text="Inventory Type :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
                     <Picker SelectedIndex="{Binding SelectedInventoryTypeIndex}" ItemsSource="{Binding ItemList}" ItemDisplayBinding="{Binding ItemTypeName}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                 </StackLayout>
-                <Entry x:Name="BarcodeEntry" Completed="BarcodeEntry_Completed" Placeholder="Enter Barcode" ReturnCommand="{Binding GetStockInBarcodeDetailCommand}" Text="{Binding BarcodeNumber}"/>
+                <Entry x:Name="BarcodeEntry" Placeholder="Enter Barcode" ReturnCommand="{Binding GetStockInBarcodeDetailCommand}" Text="{Binding BarcodeNumber}"/>
 
                 <ActivityIndicator
                    IsRunning="{Binding IsBusy}"

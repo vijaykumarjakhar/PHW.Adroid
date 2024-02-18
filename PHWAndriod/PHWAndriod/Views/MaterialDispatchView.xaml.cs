@@ -1,5 +1,4 @@
 ﻿using PHWAndriod.ViewModels;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,12 +11,17 @@ namespace PHWAndriod.Views
         {
             InitializeComponent();
             this.BindingContext = new MaterialDispatchViewModel();
+
+            MessagingCenter.Subscribe<StockInViewModel>(this, "MaterialDispatchFocusBarcodeEntry", (sender) =>
+            {
+                BarcodeEntry.Focus();
+            });
         }
 
-        private void BarcodeEntry_Completed(object sender, EventArgs e)
-        {
-            BarcodeEntry.Focus();
-        }
+        //private void BarcodeEntry_Completed(object sender, EventArgs e)
+        //{
+        //    BarcodeEntry.Focus();
+        //}
 
         protected override void OnAppearing()
         {
