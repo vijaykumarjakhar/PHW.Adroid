@@ -78,7 +78,7 @@
                         <Label Text="{Binding OutQty}" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="#FFA500"/>
                     </StackLayout>
 
-                    <Entry x:Name="BarcodeEntry" Completed="BarcodeEntry_Completed" Placeholder="Enter Barcode" Grid.Row="6" Grid.Column="0" ReturnCommand="{Binding GetDispatchBarcodeDetailCommand}" Text="{Binding BarcodeNumber}"/>
+                    <Entry x:Name="BarcodeEntry" Placeholder="Enter Barcode" Grid.Row="6" Grid.Column="0" ReturnCommand="{Binding GetDispatchBarcodeDetailCommand}" Text="{Binding BarcodeNumber}"/>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">

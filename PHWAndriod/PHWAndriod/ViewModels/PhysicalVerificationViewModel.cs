@@ -121,14 +121,14 @@ namespace PHWAndriod.ViewModels
                     ProductName = string.Empty;
                     Description = string.Empty;
                 }
-                BarcodeEntry = string.Empty;
             }
             catch (Exception ex)
             {
                 ExceptionHandler.HandleException(ex, "PhysicalVerificationViewModel - GetBarcodeDetails");
             }
             IsBusy = false;
-
+            BarcodeEntry = string.Empty;
+            MessagingCenter.Send(this, "PhysicalVerificationFocusBarcodeEntry");
         }
 
         private async void ExecuteClearCommand(object obj)

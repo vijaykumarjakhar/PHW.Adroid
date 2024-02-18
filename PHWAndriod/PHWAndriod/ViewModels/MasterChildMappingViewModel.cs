@@ -212,13 +212,14 @@ namespace PHWAndriod.ViewModels
                             await App.Current.MainPage.DisplayAlert("PHW", "Invalid Barcode", "Ok");
                         }
                     }
-                    ChildBarcodeEntry = string.Empty;
                 }
             }
             catch (Exception ex)
             {
                 ExceptionHandler.HandleException(ex, "MasterChildMappingViewModel - GetChildBarcodeInfo");
             }
+            ChildBarcodeEntry = string.Empty;
+            MessagingCenter.Send(this, "MasterChildFocusBarcodeEntry");
         }
     }
 

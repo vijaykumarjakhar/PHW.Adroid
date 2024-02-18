@@ -265,6 +265,7 @@ namespace PHWAndriod.ViewModels
                     }
                 }
                 BarcodeNumber = string.Empty;
+                MessagingCenter.Send(this, "MaterialDispatchFocusBarcodeEntry");
             }
             catch (Exception ex)
             {

@@ -13,12 +13,16 @@ namespace PHWAndriod.Views
             InitializeComponent();
             this.BindingContext = new StockInViewModel();
 
+            MessagingCenter.Subscribe<StockInViewModel>(this, "StockInFocusBarcodeEntry", (sender) =>
+            {
+                BarcodeEntry.Focus();
+            });
         }
 
-        private void BarcodeEntry_Completed(object sender, System.EventArgs e)
-        {
-            BarcodeEntry.Focus();
-        }
+        //private void BarcodeEntry_Completed(object sender, System.EventArgs e)
+        //{
+        //    BarcodeEntry.Focus();
+        //}
 
         protected override void OnAppearing()
         {

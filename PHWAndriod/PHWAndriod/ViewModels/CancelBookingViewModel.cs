@@ -134,6 +134,7 @@ namespace PHWAndriod.ViewModels
                 ExceptionHandler.HandleException(ex, "AppLogic - GetBarcodeDetails");
             }
             IsBusy = false;
+            MessagingCenter.Send(this, "CancelBookingFocusBarcodeEntry");
 
         }
 
