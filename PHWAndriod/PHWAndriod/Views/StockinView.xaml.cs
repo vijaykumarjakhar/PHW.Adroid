@@ -15,14 +15,10 @@ namespace PHWAndriod.Views
 
             MessagingCenter.Subscribe<StockInViewModel>(this, "StockInFocusBarcodeEntry", (sender) =>
             {
+                ItemListPicker.Unfocus();
                 BarcodeEntry.Focus();
             });
         }
-
-        //private void BarcodeEntry_Completed(object sender, System.EventArgs e)
-        //{
-        //    BarcodeEntry.Focus();
-        //}
 
         protected override void OnAppearing()
         {
