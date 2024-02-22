@@ -129,8 +129,8 @@ namespace PHWAndriod.ViewModels
             {
                 ExceptionHandler.HandleException(ex, "PhysicalVerificationViewModel - GetBarcodeDetails");
             }
-            IsBusy = false;
             BarcodeEntry = string.Empty;
+            IsBusy = false;
             MessagingCenter.Send(this, "PhysicalVerificationFocusBarcodeEntry");
         }
 

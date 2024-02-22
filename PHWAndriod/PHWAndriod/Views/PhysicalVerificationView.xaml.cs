@@ -19,11 +19,6 @@ namespace PHWAndriod.Views
             });
         }
 
-        //private void BarcodeEntry_Completed(object sender, EventArgs e)
-        //{
-        //    BarcodeEntry.Focus();
-        //}
-
         protected override void OnAppearing()
         {
             base.OnAppearing();

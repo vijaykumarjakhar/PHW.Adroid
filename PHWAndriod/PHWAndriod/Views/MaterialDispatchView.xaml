@@ -22,7 +22,7 @@
                 <StackLayout Grid.Row="0" Grid.Column="0" Margin="20" Spacing="20">
                     <StackLayout Orientation="Horizontal" Spacing="30" >
                         <Label Text="Pick List No :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
-                        <Picker SelectedIndex="{Binding SelectedPickListIndex}" ItemsSource="{Binding PickList}" ItemDisplayBinding="{Binding PickOutno}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                        <Picker x:Name="PickListPicker" SelectedIndex="{Binding SelectedPickListIndex}" ItemsSource="{Binding PickList}" ItemDisplayBinding="{Binding PickOutno}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Picker.Behaviors>
                                 <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
                                 Command="{Binding PickListSelectedIndexChangedCommand}" />
@@ -32,7 +32,7 @@
 
                     <StackLayout Orientation="Horizontal" Spacing="30" >
                         <Label Text="Product :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
-                        <Picker SelectedIndex="{Binding SelectedProductListIndex}" ItemsSource="{Binding ProductList}" ItemDisplayBinding="{Binding ItemName}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                        <Picker x:Name="ProductListPicker" SelectedIndex="{Binding SelectedProductListIndex}" ItemsSource="{Binding ProductList}" ItemDisplayBinding="{Binding ItemName}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Picker.Behaviors>
                                 <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
                         Command="{Binding ProductListSelectedIndexChangedCommand}" />
@@ -42,7 +42,7 @@
 
                     <StackLayout Orientation="Horizontal" Spacing="30" >
                         <Label Text="Spool :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
-                        <Picker SelectedIndex="{Binding SelectedSpoolListIndex}" ItemsSource="{Binding SpoolList}" ItemDisplayBinding="{Binding Spool}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                        <Picker x:Name="SpoolListPicker" SelectedIndex="{Binding SelectedSpoolListIndex}" ItemsSource="{Binding SpoolList}" ItemDisplayBinding="{Binding Spool}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Picker.Behaviors>
                                 <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
                         Command="{Binding SpoolListSelectedIndexChangedCommand}" />
@@ -52,7 +52,7 @@
 
                     <StackLayout Orientation="Horizontal" Spacing="30" >
                         <Label Text="Condition :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
-                        <Picker SelectedIndex="{Binding SelectedConditionListIndex}" ItemsSource="{Binding ConditionList}" ItemDisplayBinding="{Binding Condition}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                        <Picker x:Name="ConditionListPicker" SelectedIndex="{Binding SelectedConditionListIndex}" ItemsSource="{Binding ConditionList}" ItemDisplayBinding="{Binding Condition}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Picker.Behaviors>
                                 <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
                         Command="{Binding ConditionListSelectedIndexChangedCommand}" />
@@ -62,7 +62,7 @@
 
                     <StackLayout Orientation="Horizontal" Spacing="30" >
                         <Label Text="Size :" FontSize="20" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
-                        <Picker SelectedIndex="{Binding SelectedSizeListIndex}" ItemsSource="{Binding SizeList}" ItemDisplayBinding="{Binding Size}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                        <Picker x:Name="SizeListPicker" SelectedIndex="{Binding SelectedSizeListIndex}" ItemsSource="{Binding SizeList}" ItemDisplayBinding="{Binding Size}" FontSize="18" Margin="0" HeightRequest="50" WidthRequest="150" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
                             <Picker.Behaviors>
                                 <xct:EventToCommandBehavior EventName="SelectedIndexChanged" 
                         Command="{Binding SizeListSelectedIndexChangedCommand}" />
